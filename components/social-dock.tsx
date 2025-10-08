@@ -1,6 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
+import { useState } from "react"
 
 type SocialDockProps = {
   linkedin?: string
@@ -10,17 +11,17 @@ type SocialDockProps = {
 }
 
 export default function SocialDock({
-  linkedin = "https://www.linkedin.com/in/your-profile",
-  github = "https://github.com/your-username",
-  email = "mailto:hello@example.com",
-  leetcode = "https://leetcode.com/your-username",
+  linkedin = "https://www.linkedin.com/in/varunsinha20/",
+  github = "https://github.com/VarunSinha07",
+  leetcode = "https://leetcode.com/u/varunsinha07/",
 }: SocialDockProps) {
   const items = [
     { href: linkedin, src: "/icons/linkedin.png", alt: "LinkedIn" },
     { href: github, src: "/icons/github.png", alt: "GitHub" },
-    { href: email, src: "/icons/email.png", alt: "Email" },
     { href: leetcode, src: "/icons/leetcode.png", alt: "LeetCode" },
   ]
+
+  const [hovered, setHovered] = useState<number | null>(null)
 
   return (
     <>
@@ -33,7 +34,7 @@ export default function SocialDock({
         aria-label="Social links"
       >
         <div className="glass rounded-full p-3 flex flex-col gap-3 shadow-2xl border border-border/60">
-          {items.map((it) => (
+          {items.map((it, i) => (
             <motion.a
               key={it.alt}
               href={it.href}
@@ -43,14 +44,36 @@ export default function SocialDock({
               aria-label={it.alt}
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
+              onMouseEnter={() => setHovered(i)}
+              onMouseLeave={() => setHovered(null)}
             >
               {/* spotlight glow */}
               <span
                 className="pointer-events-none absolute inset-0 rounded-full blur-md opacity-0 group-hover:opacity-100 transition-opacity bg-[radial-gradient(closest-side,rgba(56,189,248,0.45),transparent)]"
                 aria-hidden
               />
-              <div className="rounded-full h-12 w-12 grid place-items-center bg-background/40 backdrop-blur-md shadow-[inset_0_0_0_1px_rgba(255,255,255,0.06)] ring-0 group-hover:ring-2 group-hover:ring-neon transition will-change-transform group-hover:-translate-y-0.5 group-hover:rotate-3">
-                <img src={it.src || "/placeholder.svg"} alt={it.alt} className="h-7 w-7 rounded-full" />
+              <div
+                className="rounded-full h-12 w-12 grid place-items-center bg-background/40 backdrop-blur-md shadow-[inset_0_0_0_1px_rgba(255,255,255,0.06)] overflow-hidden transition will-change-transform"
+                style={{
+                  transform:
+                    hovered === null
+                      ? "translateY(0px) rotate(0deg)"
+                      : hovered === i
+                        ? "translateY(-2px) rotate(3deg)"
+                        : "translateY(0px) rotate(0deg)",
+                }}
+              >
+                <motion.img
+                  src={it.src || "/placeholder.svg?height=48&width=48&query=social icon"}
+                  alt={it.alt}
+                  className="rounded-full object-cover"
+                  initial={false}
+                  animate={{
+                    width: hovered === i ? 48 : hovered === null ? 28 : 24,
+                    height: hovered === i ? 48 : hovered === null ? 28 : 24,
+                  }}
+                  transition={{ type: "spring", stiffness: 260, damping: 18 }}
+                />
               </div>
               {/* slide-out label to the left */}
               <span className="pointer-events-none absolute right-full mr-2 origin-right translate-x-2 opacity-0 group-hover:opacity-100 group-hover:translate-x-0 transition-all text-xs select-none glass px-2 py-1 rounded-md border border-border/60">
@@ -70,22 +93,34 @@ export default function SocialDock({
         aria-label="Social links"
       >
         <div className="glass border border-border/60 rounded-full px-4 py-3 flex items-center gap-5 shadow-2xl">
-          {items.map((it) => (
+          {items.map((it, i) => (
             <motion.a
               key={it.alt}
               href={it.href}
               target={it.href.startsWith("http") ? "_blank" : undefined}
               rel={it.href.startsWith("http") ? "noreferrer" : undefined}
-              className="group rounded-full p-1.5 transition"
+              className="group relative rounded-full p-1.5 transition"
               aria-label={it.alt}
               whileHover={{ scale: 1.08, rotate: 3 }}
               whileTap={{ scale: 0.95 }}
+              onMouseEnter={() => setHovered(i)}
+              onMouseLeave={() => setHovered(null)}
             >
               <span
                 className="absolute inset-0 rounded-full blur opacity-0 group-hover:opacity-100 transition-opacity bg-[radial-gradient(closest-side,rgba(56,189,248,0.35),transparent)]"
                 aria-hidden
               />
-              <img src={it.src || "/placeholder.svg"} alt={it.alt} className="h-7 w-7 rounded-full" />
+              <motion.img
+                src={it.src || "/placeholder.svg?height=48&width=48&query=social icon"}
+                alt={it.alt}
+                className="rounded-full object-cover"
+                initial={false}
+                animate={{
+                  width: hovered === i ? 36 : 28,
+                  height: hovered === i ? 36 : 28,
+                }}
+                transition={{ type: "spring", stiffness: 260, damping: 18 }}
+              />
             </motion.a>
           ))}
         </div>

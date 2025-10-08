@@ -16,16 +16,15 @@ export default function Education() {
           transition={{ duration: 0.5 }}
         >
           <div className="flex items-center gap-4">
-            <div className="h-16 w-16 rounded-xl gradient-brand neon" aria-label="SRM Institute logo" />
+            <img src="/icons/srm.png" alt="SRM Institute logo" className="h-16 w-16 rounded-xl object-cover" />
             <div>
               <h3 className="text-lg font-semibold">SRM Institute of Science and Technology</h3>
-              <p className="text-sm text-muted-foreground">B.Tech in Computer Science and Engineering with Specialization in Big Data Analytics</p>
+              <p className="text-sm text-muted-foreground">B.Tech, Specialization: Big Data Analytics</p>
             </div>
           </div>
           <div className="mt-4 grid gap-1 text-sm text-muted-foreground">
             <p>GPA: 9.78 CGPA</p>
-            <p>Relevant coursework in Object Oriented Programming, Data Structures,
-Database Management System, Operating Systems etc.</p>
+            <p>Focus: Scalable systems, data pipelines, and full-stack engineering</p>
           </div>
         </motion.div>
       </TiltCard>
@@ -40,10 +39,12 @@ Database Management System, Operating Systems etc.</p>
             transition={{ duration: 0.5 }}
           >
             <div className="flex items-center gap-4">
-              <div className="h-12 w-12 rounded-lg bg-muted/20 border border-border/60" aria-label="School logo" />
+              <img src="/icons/vvs.jpg" alt="School logo" className="h-12 w-12 rounded-lg object-cover" />
               <div>
                 <h3 className="text-base font-semibold">Valley View School</h3>
-                <p className="text-sm text-muted-foreground">Senior Secondary, Pure Science with Computer Science & English</p>
+                <p className="text-sm text-muted-foreground">
+                  Senior Secondary, Pure Science with Computer Science & English
+                </p>
                 <p className="text-sm text-muted-foreground">Percentage : 85.2 %</p>
               </div>
             </div>

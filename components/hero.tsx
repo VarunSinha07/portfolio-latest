@@ -2,7 +2,6 @@
 
 import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
-import TiltCard from "./tilt-card"
 
 function Typewriter({ text, speed = 28 }: { text: string; speed?: number }) {
   const chars = Array.from(text)
@@ -61,7 +60,7 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 0.6 }}
           >
-            <Button asChild className="neon neon-hover text-color-white hover:text-black glass border border-border/60" variant="default">
+            <Button asChild className="neon text-white hover:text-black neon-hover glass border border-border/60" variant="default">
               <a href="#projects">View Projects</a>
             </Button>
             <Button
@@ -69,29 +68,57 @@ export default function Hero() {
               variant="outline"
               className="glass border border-border/60 hover:bg-accent/10 bg-transparent"
             >
-              <a href="/varun-sinha-resume.pdf" target="_blank" rel="noopener noreferrer">Download Resume</a>
+              {/* Replace # with resume file path when available */}
+              <a href="/varun-sinha-resume.pdf">Download Resume</a>
             </Button>
           </motion.div>
         </div>
 
-        <TiltCard className="card-gradient-border rounded-2xl glass p-1">
+        {/* Right column: portrait */}
+        <div className="relative flex items-center justify-center">
+          {/* orbital rings */}
           <motion.div
-            className="rounded-2xl glass p-6 border border-border/60"
+            aria-hidden
+            className="pointer-events-none absolute inset-0 grid place-items-center"
+            initial={{ rotate: -8, opacity: 0 }}
+            animate={{ rotate: 0, opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
+            <motion.span
+              className="block h-72 w-72 rounded-full"
+              style={{
+                background:
+                  "radial-gradient(closest-side, rgba(56,189,248,0.25), transparent 60%), conic-gradient(from 0deg, rgba(99,102,241,0.35), rgba(56,189,248,0.35), rgba(59,130,246,0.35), rgba(99,102,241,0.35))",
+                mask: "radial-gradient(closest-side, transparent 68%, black 69%)",
+                WebkitMask: "radial-gradient(closest-side, transparent 68%, black 69%)",
+              }}
+              animate={{ rotate: [0, 360] }}
+              transition={{ repeat: Number.POSITIVE_INFINITY, duration: 18, ease: "linear" }}
+            />
+          </motion.div>
+
+          <motion.div
+            className="relative h-72 w-72 rounded-full overflow-hidden bg-background/40 backdrop-blur-md border border-border/60"
             initial={{ scale: 0.92, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.25 }}
+            whileHover={{ scale: 1.02 }}
           >
-            <div className="aspect-square w-full rounded-xl bg-muted/10 flex items-center justify-center">
-              <motion.img
-                src="/varun-pic.jpg"
-                alt="Portrait of Varun Sinha"
-                className="h-64 w-64 rounded-full object-cover border border-border/60"
-                whileHover={{ scale: 1.03 }}
-                transition={{ type: "spring", stiffness: 250, damping: 14 }}
-              />
-            </div>
+            {/* subtle inner glow */}
+            <span
+              aria-hidden
+              className="pointer-events-none absolute inset-0 rounded-full bg-[radial-gradient(closest-side,rgba(56,189,248,0.12),transparent)]"
+            />
+            <motion.img
+              src="/varun-pic.jpg"
+              alt="Portrait of Varun Sinha"
+              className="h-full w-full object-cover"
+              whileHover={{ scale: 1.06, rotate: 1.5 }}
+              whileTap={{ scale: 1.02 }}
+              transition={{ type: "spring", stiffness: 240, damping: 16 }}
+            />
           </motion.div>
-        </TiltCard>
+        </div>
       </div>
     </header>
   )

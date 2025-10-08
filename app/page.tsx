@@ -31,10 +31,9 @@ export default function HomePage() {
 
       <Navbar />
       <SocialDock
-        linkedin="https://www.linkedin.com/in/varun-sinha"
-        github="https://github.com/varun-sinha"
-        email="mailto:hello@example.com"
-        leetcode="https://leetcode.com/varun-sinha"
+        linkedin = "https://www.linkedin.com/in/varunsinha20/"
+        github = "https://github.com/VarunSinha07"
+        leetcode = "https://leetcode.com/u/varunsinha07/"
       />
 
       <Hero />
@@ -43,9 +42,8 @@ export default function HomePage() {
         <About />
         <Experience />
         <Projects />
-        <Achievements />
         <Education />
-        <Contact />
+        <Achievements />
       </div>
 
       <Footer />
