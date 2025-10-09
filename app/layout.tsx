@@ -7,7 +7,7 @@ import { Suspense } from "react"
 import "./globals.css"
 
 export const metadata: Metadata = {
-  title: "Varun Sinha",
+  title: "Varun Sinha | Full Stack Developer | Backend Engineer",
   description: "Developed by Varun Sinha"
 }
 

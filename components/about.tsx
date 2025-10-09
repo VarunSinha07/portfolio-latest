@@ -2,32 +2,13 @@
 
 import Section from "./section"
 import { motion } from "framer-motion"
-import { Braces, Brain, Binary, Workflow } from "lucide-react"
+import { Brain, Binary, Workflow } from "lucide-react"
+import Image from "next/image"
 
-const skills = [
-  "C++",
-  "TypeScript",
-  "JavaScript",
-  "React.js",
-  "HTML5",
-  "CSS",
-  "Next.js",
-  "Tailwind CSS",
-  "Node.js",
-  "Express.js",
-  "SQL (PostgreSQL)",
-  "NoSQL (MongoDB)",
-  "Object-Oriented Design",
-  "Data Structures",
-  "Problem Solving",
-  "Agile Methodologies",
-  "Git (Version Control)",
-  "Docker",
-]
 
 export default function About() {
   return (
-    <Section id="about" title="About Me" subtitle="Introduction" className="scroll-mt-24">
+    <Section id="about" title="About Me" className="scroll-mt-24">
       <div className="grid gap-8">
         <motion.div
           className="glass rounded-2xl p-6 border border-border/60"
@@ -37,13 +18,10 @@ export default function About() {
           transition={{ duration: 0.6 }}
         >
           <p className="text-pretty leading-relaxed text-muted-foreground">
-            I’m Varun Sinha, a Full Stack Developer specializing in building scalable backend systems and immersive
-            front-end interfaces. I love solving complex problems, optimizing APIs, and translating ideas into robust,
-            elegant software.
+            👋 Hi, I’m Varun Sinha, a Full Stack Developer and third-year Computer Science and Engineering student (Batch of 2027). I love building responsive, high-performance web applications that blend great design with solid engineering.
           </p>
           <p className="mt-4 text-pretty leading-relaxed text-muted-foreground">
-            My toolkit spans modern frameworks and databases, and I’m passionate about clean code, performance, and
-            delightful UX.
+            I specialize in crafting scalable full-stack architectures, optimizing user experiences, and delivering feature-rich, impactful solutions. With a strong foundation in Data Structures and Algorithms, I enjoy solving complex challenges and continuously learning new technologies to create meaningful digital experiences.
           </p>
         </motion.div>
 
@@ -97,9 +75,11 @@ function SkillTile({
     >
       <div className="rounded-full h-16 w-16 grid place-items-center bg-background/40 backdrop-blur-md shadow-[inset_0_0_0_1px_rgba(255,255,255,0.06)] ring-0 group-hover:ring-2 group-hover:ring-neon transition will-change-transform group-hover:-translate-y-0.5">
         {img ? (
-          <img
-            src={img }
+          <Image
+            src={img}
             alt={name}
+            width={32}
+            height={32}
             className="h-8 w-8 rounded-full"
           />
         ) : iconClass === "Binary" ? (

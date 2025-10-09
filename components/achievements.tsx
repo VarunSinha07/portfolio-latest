@@ -2,10 +2,11 @@
 
 import Section from "./section"
 import { motion } from "framer-motion"
+import Image from "next/image"
 
 export default function Achievements() {
   return (
-    <Section id="achievements" title="Achievements & Certifications" subtitle="Highlights" className="scroll-mt-24">
+    <Section id="achievements" title="Achievements & Certifications" className="scroll-mt-24">
       <div className="grid gap-6 md:grid-cols-2">
         <motion.div
           className="glass rounded-2xl p-0 border border-border/60 overflow-hidden"
@@ -15,10 +16,16 @@ export default function Achievements() {
           transition={{ duration: 0.5 }}
           whileHover={{ y: -4 }}
         >
-          <div className="relative">
-            <img src="/images/achievements/hackathon.jpg" alt="Hackathon award" className="h-44 w-full object-cover" />
+            <div className="relative">
+            <Image 
+              src="/images/achievements/hackathon.jpg" 
+              alt="Hackathon award" 
+              width={400}
+              height={176}
+              className="h-44 w-full object-cover" 
+            />
             <span className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/70 to-transparent" />
-          </div>
+            </div>
           <div className="p-6 text-center">
             <h3 className="text-xl font-semibold">1st Runner Up</h3>
             <p className="text-muted-foreground">Full Stack Development Hackathon, VIT Chennai</p>
@@ -43,14 +50,16 @@ export default function Achievements() {
           transition={{ duration: 0.5, delay: 0.1 }}
           whileHover={{ y: -4 }}
         >
-          <div className="relative">
-            <img
+            <div className="relative">
+            <Image
               src="/images/achievements/dsa-bootcamp.jpg"
               alt="30 Days DSA Bootcamp"
+              width={400}
+              height={176}
               className="h-44 w-full object-cover"
             />
             <span className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/70 to-transparent" />
-          </div>
+            </div>
           <div className="p-6 text-center">
             <h3 className="text-xl font-semibold">30 Days DSA Bootcamp course</h3>
             <div className="mt-2 flex items-center justify-center gap-2 text-muted-foreground text-xs">

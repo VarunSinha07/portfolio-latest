@@ -74,9 +74,9 @@ export default function Hero() {
           </motion.div>
         </div>
 
-        {/* Right column: portrait */}
+    
         <div className="relative flex items-center justify-center">
-          {/* orbital rings */}
+          
           <motion.div
             aria-hidden
             className="pointer-events-none absolute inset-0 grid place-items-center"
@@ -104,7 +104,7 @@ export default function Hero() {
             transition={{ duration: 0.6, delay: 0.25 }}
             whileHover={{ scale: 1.02 }}
           >
-            {/* subtle inner glow */}
+           
             <span
               aria-hidden
               className="pointer-events-none absolute inset-0 rounded-full bg-[radial-gradient(closest-side,rgba(56,189,248,0.12),transparent)]"

@@ -13,10 +13,6 @@ export default function ParticleBackground() {
     let w = (canvas.width = window.innerWidth)
     let h = (canvas.height = window.innerHeight)
 
-    const style = getComputedStyle(document.documentElement)
-    const brand = style.getPropertyValue("--brand") || "cyan"
-    const accent = style.getPropertyValue("--accent") || "magenta"
-
     const count = Math.min(90, Math.floor((w * h) / 25000))
     particlesRef.current = new Array(count).fill(0).map(() => ({
       x: Math.random() * w,

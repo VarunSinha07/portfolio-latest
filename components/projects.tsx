@@ -5,6 +5,7 @@ import { motion } from "framer-motion"
 import { useMemo, useState } from "react"
 import TiltCard from "./tilt-card"
 import { Button } from "@/components/ui/button"
+import Image from "next/image"
 
 type Project = {
   title: string
@@ -43,10 +44,10 @@ type Filter = (typeof filters)[number]
 
 export default function Projects() {
   const [active, setActive] = useState<Filter>("All")
-  const list = useMemo(() => projects.filter((p) => active === "All" || p.tags.includes(active as any)), [active])
+  const list = useMemo(() => projects.filter((p) => active === "All" || p.tags.includes(active as "Frontend" | "Backend" | "Full Stack")), [active])
 
   return (
-    <Section id="projects" title="Projects" subtitle="Selected Work" className="scroll-mt-24">
+    <Section id="projects" title="Projects" className="scroll-mt-24">
       <div className="mb-6 flex flex-wrap gap-2">
         {filters.map((f) => (
           <Button
@@ -72,14 +73,16 @@ export default function Projects() {
               viewport={{ once: true, amount: 0.4 }}
               transition={{ duration: 0.5, delay: idx * 0.06 }}
             >
-              <div className="relative">
-                <img
+                <div className="relative">
+                <Image
                   src={`/.jpg?height=360&width=640&query=${p.imgQuery}`}
                   alt={`${p.title} preview`}
+                  width={640}
+                  height={360}
                   className="aspect-video w-full object-cover"
                 />
                 <div className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-20 gradient-brand" />
-              </div>
+                </div>
               <div className="p-5">
                 <div className="flex flex-wrap items-center gap-2">
                   {p.tags.map((t) => (

@@ -3,10 +3,11 @@
 import Section from "./section"
 import TiltCard from "./tilt-card"
 import { motion } from "framer-motion"
+import Image from "next/image"
 
 export default function Education() {
   return (
-    <Section id="education" title="Education" subtitle="Academics" className="scroll-mt-24">
+    <Section id="education" title="Education" className="scroll-mt-24">
       <TiltCard className="rounded-2xl card-gradient-border">
         <motion.div
           className="glass rounded-2xl p-6 border border-border/60"
@@ -15,13 +16,13 @@ export default function Education() {
           viewport={{ once: true, amount: 0.5 }}
           transition={{ duration: 0.5 }}
         >
-          <div className="flex items-center gap-4">
-            <img src="/icons/srm.png" alt="SRM Institute logo" className="h-16 w-16 rounded-xl object-cover" />
+            <div className="flex items-center gap-4">
+            <Image src="/icons/srm.png" alt="SRM Institute logo" className="h-16 w-16 rounded-xl object-cover" width={64} height={64} />
             <div>
               <h3 className="text-lg font-semibold">SRM Institute of Science and Technology</h3>
               <p className="text-sm text-muted-foreground">B.Tech, Specialization: Big Data Analytics</p>
             </div>
-          </div>
+            </div>
           <div className="mt-4 grid gap-1 text-sm text-muted-foreground">
             <p>GPA: 9.78 CGPA</p>
             <p>Focus: Scalable systems, data pipelines, and full-stack engineering</p>
@@ -39,13 +40,13 @@ export default function Education() {
             transition={{ duration: 0.5 }}
           >
             <div className="flex items-center gap-4">
-              <img src="/icons/vvs.jpg" alt="School logo" className="h-12 w-12 rounded-lg object-cover" />
+              <Image src="/icons/vvs.jpg" alt="School logo" className="h-12 w-12 rounded-lg object-cover" width={48} height={48} />
               <div>
-                <h3 className="text-base font-semibold">Valley View School</h3>
-                <p className="text-sm text-muted-foreground">
-                  Senior Secondary, Pure Science with Computer Science & English
-                </p>
-                <p className="text-sm text-muted-foreground">Percentage : 85.2 %</p>
+              <h3 className="text-base font-semibold">Valley View School</h3>
+              <p className="text-sm text-muted-foreground">
+                Senior Secondary, Pure Science with Computer Science & English
+              </p>
+              <p className="text-sm text-muted-foreground">Percentage : 85.2 %</p>
               </div>
             </div>
           </motion.div>

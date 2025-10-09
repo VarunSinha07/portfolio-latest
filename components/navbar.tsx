@@ -11,7 +11,6 @@ export default function Navbar() {
       aria-label="Main"
     >
       <div className="mx-auto w-full max-w-6xl px-4 md:px-6 h-14 flex items-center justify-between">
-        {/* left placeholder to keep spacing balanced */}
         <div aria-hidden className="w-[120px]" />
         <div className="hidden md:flex items-center gap-4 text-sm">
           <a href="#about" className="hover:neon">
@@ -33,7 +32,6 @@ export default function Navbar() {
             Contact
           </a>
         </div>
-        {/* right placeholder to replace removed resume button */}
         <div aria-hidden className="w-[120px]" />
       </div>
     </motion.nav>
