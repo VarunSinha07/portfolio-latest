@@ -60,15 +60,15 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 0.6 }}
           >
-            <Button asChild className="neon text-white hover:text-black neon-hover glass border border-border/60" variant="default">
+            <Button asChild className="glass border border-border/60 hover:bg-accent/10 bg-transparent" variant="outline">
               <a href="#projects">View Projects</a>
             </Button>
             <Button
               asChild
-              variant="outline"
-              className="glass border border-border/60 hover:bg-accent/10 bg-transparent"
+              variant="default"
+              className="neon text-white hover:text-black neon-hover glass border border-border/60"
             >
-              <a href="/varun-sinha-resume.pdf" target="_blank" rel="noopener noreferrer">Download Resume</a>
+              <a href="/varun-sinha-resume.pdf" target="_blank" rel="noopener noreferrer">View Resume</a>
             </Button>
           </motion.div>
         </div>
