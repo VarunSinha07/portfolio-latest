@@ -88,13 +88,13 @@ export default function SocialDock({
 
       {/* Mobile: bottom-center pill */}
       <motion.nav
-        initial={{ y: 16, opacity: 0 }}
+        initial={{ y: 32, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.5 }}
         className="md:hidden fixed bottom-5 left-1/2 -translate-x-1/2 z-40"
         aria-label="Social links"
       >
-        <div className="glass border border-border/60 rounded-full px-4 py-3 flex items-center gap-5 shadow-2xl">
+        <div className="glass border border-border/60 rounded-full py-2 flex items-center gap-3 shadow-xl">
           {items.map((it, i) => (
             <motion.a
               key={it.alt}
