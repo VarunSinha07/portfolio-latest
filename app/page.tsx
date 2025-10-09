@@ -33,6 +33,7 @@ export default function HomePage() {
         linkedin = "https://www.linkedin.com/in/varunsinha20/"
         github = "https://github.com/VarunSinha07"
         leetcode = "https://leetcode.com/u/varunsinha07/"
+        email = "mailto:varunsinha2604@gmail.com"
       />
 
       <Hero />

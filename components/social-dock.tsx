@@ -14,11 +14,13 @@ export default function SocialDock({
   linkedin = "https://www.linkedin.com/in/varunsinha20/",
   github = "https://github.com/VarunSinha07",
   leetcode = "https://leetcode.com/u/varunsinha07/",
+  email = "mailto:varunsinha2604@gmail.com"
 }: SocialDockProps) {
   const items = [
     { href: linkedin, src: "/icons/linkedin.png", alt: "LinkedIn" },
     { href: github, src: "/icons/github.png", alt: "GitHub" },
     { href: leetcode, src: "/icons/leetcode.png", alt: "LeetCode" },
+    { href: email, src: "/icons/email.png", alt: "Email" },
   ]
 
   const [hovered, setHovered] = useState<number | null>(null)
