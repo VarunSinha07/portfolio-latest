@@ -17,18 +17,25 @@ type Project = {
 
 const projects: Project[] = [
   {
+    title: "IFIA Bharat",
+    desc: "Developed the official website for IFIA Bharat. Implemented the full frontend and backend solution supporting million hits per second with low latency and high availability.",
+    href: "https://ifiabharat.com",
+    tags: ["Full Stack"],
+    img: "/projects/IFIA-bharat.png",
+  },
+  {
+    title: "Media Nexus",
+    desc: "Full-stack app for SRM Group to manage media assets, approvals, and publishing workflow.",
+    href: "https://media-nexus.vercel.app/",
+    tags: ["Full Stack"],
+    img: "/projects/media-nexus-logo.png",
+  },
+  {
     title: "BioVerse - Biotech Startup Incubator",
     desc: "Incubation platform for biotech startups: onboarding, mentorship, and resource tracking.",
     href: "https://bio-verse.vercel.app/",
     tags: ["Full Stack"],
     img: "/projects/bioverse.png",
-  },
-  {
-    title: "Media Nexus - Digital Asset Manager",
-    desc: "Full-stack app for SRM Group to manage media assets, approvals, and publishing workflow.",
-    href: "https://media-nexus.vercel.app/",
-    tags: ["Full Stack"],
-    img: "/projects/media-nexus-logo.png",
   },
   {
     title: "EventHub - College Event Platform",
