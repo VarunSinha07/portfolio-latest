@@ -28,9 +28,6 @@ export default function Navbar() {
           <a href="#education" className="hover:neon">
             Education
           </a>
-          <a href="#contact" className="hover:neon">
-            Contact
-          </a>
         </div>
         <div aria-hidden className="w-[120px]" />
       </div>
