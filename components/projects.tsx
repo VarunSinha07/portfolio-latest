@@ -45,7 +45,7 @@ const projects: Project[] = [
     img: "/projects/techtransfer.png",
   },
   {
-    title: "EventHub - College Event Platform",
+    title: "GoFest - College Event Platform",
     desc: "Hackathon project: event creation, registration, scheduling, team collab. Runner-up (TechnoVIT).",
     href: "https://go-fest.vercel.app/",
     tags: ["Full Stack", "Frontend", "Backend"],
