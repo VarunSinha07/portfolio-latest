@@ -68,8 +68,7 @@ export default function Hero() {
               variant="outline"
               className="glass border border-border/60 hover:bg-accent/10 bg-transparent"
             >
-              {/* Replace # with resume file path when available */}
-              <a href="/varun-sinha-resume.pdf">Download Resume</a>
+              <a href="/varun-sinha-resume.pdf" target="_blank" rel="noopener noreferrer">Download Resume</a>
             </Button>
           </motion.div>
         </div>
