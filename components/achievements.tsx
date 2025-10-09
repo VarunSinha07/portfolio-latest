@@ -22,7 +22,7 @@ export default function Achievements() {
               alt="Hackathon award" 
               width={400}
               height={176}
-              className="h-44 w-full object-cover" 
+              className="h-60 w-full object-cover" 
             />
             <span className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/70 to-transparent" />
             </div>
@@ -52,11 +52,48 @@ export default function Achievements() {
         >
             <div className="relative">
             <Image
-              src="/images/achievements/dsa-bootcamp.jpg"
+              src="/certificates/naukri-certificate.png"
+              alt="Naukri Campus Young Turks 2025 Merit Certificate"
+              width={400}
+              height={300}
+              className="h-60 w-full object-cover"
+            />
+            <span className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/70 to-transparent" />
+            </div>
+          <div className="p-6 text-center">
+            <h3 className="text-xl font-semibold">Naukri Campus Young Turks 2025 Merit Certificate</h3>
+            <div className="mt-2 flex items-center justify-center gap-2 text-muted-foreground text-xs">
+              <span className="glass px-3 py-1 rounded-md border border-border/60">Naukri Campus</span>
+              <span>•</span>
+              <span className="glass px-3 py-1 rounded-md border border-border/60">2025</span>
+            </div>
+            <div className="mt-4">
+              <a
+                href="https://www.naukri.com/campus/certificates/young_turks_round_1_achievement/v0/68d9bab67baf842bcc2d8acb"
+                className="text-xs glass px-3 py-1 rounded-md border border-border/60 hover:neon transition inline-block"
+                target="_blank"
+                rel="noreferrer"
+              >
+                View Certificate
+              </a>
+            </div>
+          </div>
+        </motion.div>
+        <motion.div
+          className="glass rounded-2xl p-0 border border-border/60 overflow-hidden"
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.5 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          whileHover={{ y: -4 }}
+        >
+            <div className="relative">
+            <Image
+              src="/certificates/dsa-bootcamp-certificate.jpg"
               alt="30 Days DSA Bootcamp"
               width={400}
               height={176}
-              className="h-44 w-full object-cover"
+              className="h-60 w-full object-cover"
             />
             <span className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/70 to-transparent" />
             </div>
@@ -69,7 +106,44 @@ export default function Achievements() {
             </div>
             <div className="mt-4">
               <a
-                href="#"
+                href="https://unstop.com/certificate-preview/cf624d71-4586-41bf-8ab7-27579a9ad38d"
+                className="text-xs glass px-3 py-1 rounded-md border border-border/60 hover:neon transition inline-block"
+                target="_blank"
+                rel="noreferrer"
+              >
+                View Certificate
+              </a>
+            </div>
+          </div>
+        </motion.div>
+        <motion.div
+          className="glass rounded-2xl p-0 border border-border/60 overflow-hidden"
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.5 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          whileHover={{ y: -4 }}
+        >
+            <div className="relative">
+            <Image
+              src="/certificates/data-science-certificate.jpg"
+              alt="Data Science Certificate"
+              width={400}
+              height={176}
+              className="h-60 w-full object-cover"
+            />
+            <span className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/70 to-transparent" />
+            </div>
+          <div className="p-6 text-center">
+            <h3 className="text-xl font-semibold">The Data Science Course: Complete Data Science Bootcamp 2024</h3>
+            <div className="mt-2 flex items-center justify-center gap-2 text-muted-foreground text-xs">
+              <span className="glass px-3 py-1 rounded-md border border-border/60">Udemy</span>
+              <span>•</span>
+              <span className="glass px-3 py-1 rounded-md border border-border/60">2024</span>
+            </div>
+            <div className="mt-4">
+              <a
+                href="https://www.udemy.com/certificate/UC-ce5f33f9-95d2-4d6e-9dea-2ffbee35f9d9/"
                 className="text-xs glass px-3 py-1 rounded-md border border-border/60 hover:neon transition inline-block"
                 target="_blank"
                 rel="noreferrer"
