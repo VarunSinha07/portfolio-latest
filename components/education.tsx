@@ -20,11 +20,11 @@ export default function Education() {
             <Image src="/icons/srm.png" alt="SRM Institute logo" className="h-16 w-16 rounded-xl object-cover" width={64} height={64} />
             <div>
               <h3 className="text-lg font-semibold">SRM Institute of Science and Technology</h3>
-              <p className="text-sm text-muted-foreground">B.Tech, Specialization: Big Data Analytics</p>
+              <p className="text-sm text-muted-foreground">B.Tech in Computer Science and Engineering with Specialization in Big Data Analytics</p>
             </div>
             </div>
           <div className="mt-4 grid gap-1 text-sm text-muted-foreground">
-            <p>GPA: 9.78 CGPA</p>
+            <p>GPA: 9.77 CGPA</p>
             <p>Focus: Scalable systems, data pipelines, and full-stack engineering</p>
           </div>
         </motion.div>
