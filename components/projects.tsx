@@ -35,7 +35,7 @@ const projects: Project[] = [
     desc: "Hackathon project: event creation, registration, scheduling, team collab. Runner-up (TechnoVIT).",
     href: "https://go-fest.vercel.app/",
     tags: ["Backend", "Frontend", "Full Stack"],
-    img: "/projects/gofest.png"
+    img: "/projects/goFest.png"
   },
 ];
 
