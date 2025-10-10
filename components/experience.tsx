@@ -29,7 +29,7 @@ const items = [
 
 export default function Experience() {
   return (
-    <Section id="experience" title="Experience" className="scroll-mt-24">
+    <Section id="experience" title="Experience">
       <div className="relative">
         {/* aligned vertical timeline */}
         <div className="absolute left-4 top-0 bottom-0 w-px bg-muted/40" aria-hidden />

@@ -9,8 +9,6 @@ import Projects from "@/components/projects"
 import Achievements from "@/components/achievements"
 import Education from "@/components/education"
 import Footer from "@/components/footer"
-import ParticleBackground from "@/components/particle-background"
-import CursorHalo from "@/components/cursor-halo"
 import Navbar from "@/components/navbar"
 import SocialDock from "@/components/social-dock"
 
@@ -21,9 +19,6 @@ export default function HomePage() {
 
   return (
     <main ref={ref} className="relative min-h-screen bg-background text-foreground">
-      <CursorHalo />
-      <ParticleBackground />
-
       <motion.div style={{ y: parallaxY }} aria-hidden className="pointer-events-none fixed inset-0 -z-10">
         <div className="absolute inset-0 gradient-brand opacity-20 blur-3xl" />
       </motion.div>
