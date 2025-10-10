@@ -1,10 +1,11 @@
-"use client"
+"use client";
 
-import { motion } from "framer-motion"
-import { Button } from "@/components/ui/button"
+import { motion } from "framer-motion";
+import { Button } from "@/components/ui/button";
+import { useEffect, useState } from "react";
 
 function Typewriter({ text, speed = 28 }: { text: string; speed?: number }) {
-  const chars = Array.from(text)
+  const chars = Array.from(text);
   return (
     <span aria-label={text}>
       {chars.map((c, i) => (
@@ -18,10 +19,26 @@ function Typewriter({ text, speed = 28 }: { text: string; speed?: number }) {
         </motion.span>
       ))}
     </span>
-  )
+  );
 }
 
 export default function Hero() {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(
+        window.innerWidth < 768 ||
+          /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+            navigator.userAgent
+          )
+      );
+    };
+
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
   return (
     <header className="relative mx-auto w-full max-w-6xl px-4 md:px-6 pt-24 md:pt-32 pb-20">
       <div className="relative grid gap-8 md:grid-cols-2 items-center">
@@ -60,7 +77,11 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 0.6 }}
           >
-            <Button asChild className="glass border border-border/60 hover:bg-accent/10 bg-transparent" variant="outline">
+            <Button
+              asChild
+              className="glass border border-border/60 hover:bg-accent/10 bg-transparent"
+              variant="outline"
+            >
               <a href="#projects">View Projects</a>
             </Button>
             <Button
@@ -68,14 +89,18 @@ export default function Hero() {
               variant="default"
               className="neon text-white hover:text-black neon-hover glass border border-border/60"
             >
-              <a href="/varun-sinha-resume.pdf" target="_blank" rel="noopener noreferrer">View Resume</a>
+              <a
+                href="/varun-sinha-resume.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                View Resume
+              </a>
             </Button>
           </motion.div>
         </div>
 
-    
         <div className="relative flex items-center justify-center">
-          
           <motion.div
             aria-hidden
             className="pointer-events-none absolute inset-0 grid place-items-center"
@@ -89,10 +114,19 @@ export default function Hero() {
                 background:
                   "radial-gradient(closest-side, rgba(56,189,248,0.25), transparent 60%), conic-gradient(from 0deg, rgba(99,102,241,0.35), rgba(56,189,248,0.35), rgba(59,130,246,0.35), rgba(99,102,241,0.35))",
                 mask: "radial-gradient(closest-side, transparent 68%, black 69%)",
-                WebkitMask: "radial-gradient(closest-side, transparent 68%, black 69%)",
+                WebkitMask:
+                  "radial-gradient(closest-side, transparent 68%, black 69%)",
               }}
-              animate={{ rotate: [0, 360] }}
-              transition={{ repeat: Number.POSITIVE_INFINITY, duration: 18, ease: "linear" }}
+              animate={isMobile ? {} : { rotate: [0, 360] }}
+              transition={
+                isMobile
+                  ? {}
+                  : {
+                      repeat: Number.POSITIVE_INFINITY,
+                      duration: 18,
+                      ease: "linear",
+                    }
+              }
             />
           </motion.div>
 
@@ -101,9 +135,8 @@ export default function Hero() {
             initial={{ scale: 0.92, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.25 }}
-            whileHover={{ scale: 1.02 }}
+            whileHover={isMobile ? {} : { scale: 1.02 }}
           >
-           
             <span
               aria-hidden
               className="pointer-events-none absolute inset-0 rounded-full bg-[radial-gradient(closest-side,rgba(56,189,248,0.12),transparent)]"
@@ -112,13 +145,15 @@ export default function Hero() {
               src="/varun-pic.jpg"
               alt="Portrait of Varun Sinha"
               className="h-full w-full object-cover"
-              whileHover={{ scale: 1.06, rotate: 1.5 }}
-              whileTap={{ scale: 1.02 }}
-              transition={{ type: "spring", stiffness: 240, damping: 16 }}
+              whileHover={isMobile ? {} : { scale: 1.06, rotate: 1.5 }}
+              whileTap={isMobile ? {} : { scale: 1.02 }}
+              transition={
+                isMobile ? {} : { type: "spring", stiffness: 240, damping: 16 }
+              }
             />
           </motion.div>
         </div>
       </div>
     </header>
-  )
+  );
 }
