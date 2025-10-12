@@ -109,7 +109,7 @@ export default function Hero() {
             transition={{ duration: 0.8, delay: 0.2 }}
           >
             <motion.span
-              className="block h-72 w-72 rounded-full"
+              className="block h-64 w-64 sm:h-72 sm:w-72 rounded-full"
               style={{
                 background:
                   "radial-gradient(closest-side, rgba(56,189,248,0.25), transparent 60%), conic-gradient(from 0deg, rgba(99,102,241,0.35), rgba(56,189,248,0.35), rgba(59,130,246,0.35), rgba(99,102,241,0.35))",
@@ -131,7 +131,7 @@ export default function Hero() {
           </motion.div>
 
           <motion.div
-            className="relative h-72 w-72 rounded-full overflow-hidden bg-background/40 backdrop-blur-md border border-border/60"
+            className="relative h-64 w-64 sm:h-72 sm:w-72 rounded-full overflow-hidden bg-background/40 backdrop-blur-md border border-border/60"
             initial={{ scale: 0.92, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.25 }}
@@ -144,9 +144,10 @@ export default function Hero() {
             <motion.img
               src="/varun-pic.jpg"
               alt="Portrait of Varun Sinha"
-              className="h-full w-full object-cover"
-              whileHover={isMobile ? {} : { scale: 1.06, rotate: 1.5 }}
-              whileTap={isMobile ? {} : { scale: 1.02 }}
+              className="absolute inset-0 h-full w-full object-cover object-[center_25%] min-h-full min-w-full"
+              style={{ transform: "scale(1.15)" }}
+              whileHover={isMobile ? {} : { scale: 1.21, rotate: 1.5 }}
+              whileTap={isMobile ? {} : { scale: 1.17 }}
               transition={
                 isMobile ? {} : { type: "spring", stiffness: 240, damping: 16 }
               }

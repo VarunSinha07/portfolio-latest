@@ -43,7 +43,7 @@ export default function About() {
         data-mobile-optimized
       >
         <h3 className="text-lg font-semibold tracking-tight mb-4">Skills</h3>
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 sm:gap-6">
           <SkillTile name="C++" img="/icons/cpp.jpg" />
           <SkillTile name="TypeScript" img="/icons/typescript.png" />
           <SkillTile name="JavaScript" img="/icons/javascript.png" />
@@ -96,31 +96,31 @@ function SkillTile({
 
   return (
     <motion.div
-      className="group flex flex-col items-center gap-2"
+      className="group flex flex-col items-center gap-1.5 sm:gap-2"
       initial={isMobile ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: isMobile ? 0.01 : 0.2 }}
       transition={{ duration: isMobile ? 0.05 : 0.35 }}
       whileHover={isMobile ? {} : { scale: 1.04, y: -2 }}
     >
-      <div className="rounded-full h-16 w-16 grid place-items-center bg-background/40 backdrop-blur-md shadow-[inset_0_0_0_1px_rgba(255,255,255,0.06)] ring-0 group-hover:ring-2 group-hover:ring-neon transition will-change-transform group-hover:-translate-y-0.5">
+      <div className="rounded-full h-12 w-12 sm:h-16 sm:w-16 grid place-items-center bg-background/40 backdrop-blur-md shadow-[inset_0_0_0_1px_rgba(255,255,255,0.06)] ring-0 group-hover:ring-2 group-hover:ring-neon transition will-change-transform group-hover:-translate-y-0.5">
         {img ? (
           <Image
             src={img}
             alt={name}
             width={32}
             height={32}
-            className="h-8 w-8 rounded-full"
+            className="h-6 w-6 sm:h-8 sm:w-8 rounded-full"
           />
         ) : iconClass === "Binary" ? (
-          <Binary className="h-6 w-6" />
+          <Binary className="h-5 w-5 sm:h-6 sm:w-6" />
         ) : iconClass === "Brain" ? (
-          <Brain className="h-6 w-6" />
+          <Brain className="h-5 w-5 sm:h-6 sm:w-6" />
         ) : (
-          <Workflow className="h-6 w-6" />
+          <Workflow className="h-5 w-5 sm:h-6 sm:w-6" />
         )}
       </div>
-      <div className="text-xs text-center text-muted-foreground">{name}</div>
+      <div className="text-[10px] sm:text-xs text-center text-muted-foreground leading-tight">{name}</div>
     </motion.div>
   );
 }
