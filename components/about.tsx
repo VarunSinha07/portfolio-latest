@@ -1,39 +1,24 @@
-"use client";
-
-import Section from "./section";
-import { motion } from "framer-motion";
-import { Brain, Binary, Workflow } from "lucide-react";
-import Image from "next/image";
-import { useEffect, useState } from "react";
+"use client"
+import { useState, useEffect } from "react"
+import { motion } from "framer-motion"
+import Section from "./section"
+import Image from "next/image"
+import { Binary, Brain, Workflow } from "lucide-react"
+import useIsMobile from "@/hooks/use-is-mobile"
 
 export default function About() {
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(
-        window.innerWidth < 768 ||
-          /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-            navigator.userAgent
-          )
-      );
-    };
-
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
-  }, []);
+  const isMobile = useIsMobile()
 
   return (
-    <Section id="about" title="About Me" className="scroll-mt-24">
-      <div className="grid gap-8">
-        <motion.div
-          className="glass rounded-2xl p-6 border border-border/60"
-          initial={isMobile ? { opacity: 1, x: 0 } : { opacity: 0, x: -12 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true, amount: isMobile ? 0.1 : 0.6 }}
-          transition={{ duration: isMobile ? 0.1 : 0.6 }}
-        >
+    <Section id="about" title="About Me" data-mobile-optimized>
+      <motion.div
+        className="glass rounded-2xl p-6 border border-border/60"
+        initial={isMobile ? { opacity: 1, x: 0 } : { opacity: 0, x: -12 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        viewport={{ once: true, amount: isMobile ? 0 : 0.6 }}
+        transition={{ duration: isMobile ? 0.1 : 0.6 }}
+        data-mobile-optimized
+      >
           <p className="text-pretty leading-relaxed text-muted-foreground">
             👋 Hi, I’m Varun Sinha, a Full Stack Developer and third-year
             Computer Science and Engineering student (Batch of 2027). I love
@@ -50,12 +35,13 @@ export default function About() {
         </motion.div>
 
         <motion.div
-          initial={isMobile ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: isMobile ? 0.1 : 0.4 }}
-          transition={{ duration: isMobile ? 0.1 : 0.6 }}
-          className="glass rounded-2xl p-6 border border-border/60"
-        >
+        initial={isMobile ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: isMobile ? 0 : 0.4 }}
+        transition={{ duration: isMobile ? 0.1 : 0.6 }}
+        className="glass rounded-2xl p-6 border border-border/60 mt-6"
+        data-mobile-optimized
+      >
           <h3 className="text-lg font-semibold tracking-tight mb-4">Skills</h3>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6">
             <SkillTile name="C++" img="/icons/cpp.jpg" />
@@ -78,7 +64,6 @@ export default function About() {
             <SkillTile name="Docker" img="/icons/docker.png" />
           </div>
         </motion.div>
-      </div>
     </Section>
   );
 }

@@ -2,10 +2,11 @@
 
 import Section from "./section";
 import { motion } from "framer-motion";
-import { useMemo, useState, useEffect } from "react";
+import { useMemo, useState } from "react";
 import TiltCard from "./tilt-card";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import useIsMobile from "@/hooks/use-is-mobile";
 
 type Project = {
   title: string;
@@ -58,22 +59,7 @@ type Filter = (typeof filters)[number];
 
 export default function Projects() {
   const [active, setActive] = useState<Filter>("All");
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(
-        window.innerWidth < 768 ||
-          /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-            navigator.userAgent
-          )
-      );
-    };
-
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
-  }, []);
+  const isMobile = useIsMobile()
 
   const list = useMemo(
     () =>
@@ -86,7 +72,7 @@ export default function Projects() {
   );
 
   return (
-    <Section id="projects" title="Projects" className="scroll-mt-24">
+    <Section id="projects" title="Projects" className="scroll-mt-24" data-mobile-optimized>
       <div className="mb-6 flex flex-wrap gap-2">
         {filters.map((f) => (
           <Button
@@ -105,7 +91,7 @@ export default function Projects() {
         ))}
       </div>
 
-      <div className="grid gap-6 md:grid-cols-2">
+      <div className="grid gap-6 md:grid-cols-2" data-mobile-optimized>
         {list.map((p, idx) => (
           <TiltCard key={p.title} className="rounded-2xl card-gradient-border">
             <motion.a

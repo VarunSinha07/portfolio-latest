@@ -2,7 +2,7 @@
 
 import Section from "./section";
 import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import useIsMobile from "@/hooks/use-is-mobile";
 
 const items = [
   {
@@ -82,25 +82,10 @@ const items = [
 ];
 
 export default function Experience() {
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(
-        window.innerWidth < 768 ||
-          /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-            navigator.userAgent
-          )
-      );
-    };
-
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
-  }, []);
+  const isMobile = useIsMobile()
 
   return (
-    <Section id="experience" title="Experience">
+    <Section id="experience" title="Experience" data-mobile-optimized>
       <div className="relative">
         {/* aligned vertical timeline */}
         <div

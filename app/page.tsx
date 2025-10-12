@@ -1,7 +1,4 @@
 "use client";
-
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef, useEffect, useState } from "react";
 import Hero from "@/components/hero";
 import About from "@/components/about";
 import Experience from "@/components/experience";
@@ -13,54 +10,11 @@ import Navbar from "@/components/navbar";
 import SocialDock from "@/components/social-dock";
 
 export default function HomePage() {
-  const ref = useRef<HTMLDivElement | null>(null);
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(
-        window.innerWidth < 768 ||
-          /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-            navigator.userAgent
-          )
-      );
-    };
-
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
-  }, []);
-
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start start", "end end"],
-  });
-  // Reduce parallax effect on mobile for better performance
-  const parallaxY = useTransform(
-    scrollYProgress,
-    [0, 1],
-    [0, isMobile ? -40 : -120]
-  );
 
   return (
-    <main
-      ref={ref}
-      className="relative min-h-screen bg-background text-foreground"
+    <main className="relative min-h-screen bg-background text-foreground"
     >
-      {!isMobile && (
-        <motion.div
-          style={{ y: parallaxY }}
-          aria-hidden
-          className="pointer-events-none fixed inset-0 -z-10"
-        >
-          <div className="absolute inset-0 gradient-brand opacity-20 blur-3xl" />
-        </motion.div>
-      )}
-      {isMobile && (
-        <div aria-hidden className="pointer-events-none fixed inset-0 -z-10">
-          <div className="absolute inset-0 gradient-brand opacity-10 blur-2xl" />
-        </div>
-      )}
+
 
       <Navbar />
       <SocialDock

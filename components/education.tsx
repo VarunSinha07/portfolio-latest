@@ -4,28 +4,13 @@ import Section from "./section";
 import TiltCard from "./tilt-card";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import useIsMobile from "@/hooks/use-is-mobile";
 
 export default function Education() {
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(
-        window.innerWidth < 768 ||
-          /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-            navigator.userAgent
-          )
-      );
-    };
-
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
-  }, []);
+  const isMobile = useIsMobile();
 
   return (
-    <Section id="education" title="Education" className="scroll-mt-24">
+    <Section id="education" title="Education" className="scroll-mt-24" data-mobile-optimized>
       <TiltCard className="rounded-2xl card-gradient-border">
         <motion.div
           className="glass rounded-2xl p-6 border border-border/60"
