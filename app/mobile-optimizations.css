@@ -2,9 +2,20 @@
 
 /* Reduce animations and transitions on smaller screens */
 @media (max-width: 768px) {
+  /* Force immediate content visibility */
+  [data-mobile-optimized] {
+    opacity: 1 !important;
+    transform: translateY(0) translateX(0) scale(1) !important;
+  }
+  
   /* Disable will-change on mobile for better performance */
   * {
     will-change: auto !important;
+  }
+  
+  /* Optimize scroll performance */
+  * {
+    -webkit-overflow-scrolling: touch;
   }
   
   /* Reduce transform complexity */

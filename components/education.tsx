@@ -4,17 +4,30 @@ import Section from "./section"
 import TiltCard from "./tilt-card"
 import { motion } from "framer-motion"
 import Image from "next/image"
+import { useEffect, useState } from "react"
 
 export default function Education() {
+  const [isMobile, setIsMobile] = useState(false)
+  
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768 || /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent))
+    }
+    
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
+
   return (
     <Section id="education" title="Education" className="scroll-mt-24">
       <TiltCard className="rounded-2xl card-gradient-border">
         <motion.div
           className="glass rounded-2xl p-6 border border-border/60"
-          initial={{ opacity: 0, y: 12 }}
+          initial={isMobile ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.5 }}
-          transition={{ duration: 0.5 }}
+          viewport={{ once: true, amount: isMobile ? 0.1 : 0.5 }}
+          transition={{ duration: isMobile ? 0.1 : 0.5 }}
         >
             <div className="flex items-center gap-4">
             <Image src="/icons/srm.png" alt="SRM Institute logo" className="h-16 w-16 rounded-xl object-cover" width={64} height={64} />

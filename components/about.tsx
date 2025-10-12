@@ -4,18 +4,31 @@ import Section from "./section"
 import { motion } from "framer-motion"
 import { Brain, Binary, Workflow } from "lucide-react"
 import Image from "next/image"
+import { useEffect, useState } from "react"
 
 
 export default function About() {
+  const [isMobile, setIsMobile] = useState(false)
+  
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768 || /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent))
+    }
+    
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
+
   return (
     <Section id="about" title="About Me" className="scroll-mt-24">
       <div className="grid gap-8">
         <motion.div
           className="glass rounded-2xl p-6 border border-border/60"
-          initial={{ opacity: 0, x: -12 }}
+          initial={isMobile ? { opacity: 1, x: 0 } : { opacity: 0, x: -12 }}
           whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true, amount: 0.6 }}
-          transition={{ duration: 0.6 }}
+          viewport={{ once: true, amount: isMobile ? 0.1 : 0.6 }}
+          transition={{ duration: isMobile ? 0.1 : 0.6 }}
         >
           <p className="text-pretty leading-relaxed text-muted-foreground">
             👋 Hi, I’m Varun Sinha, a Full Stack Developer and third-year Computer Science and Engineering student (Batch of 2027). I love building responsive, high-performance web applications that blend great design with solid engineering.
@@ -26,10 +39,10 @@ export default function About() {
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, y: 12 }}
+          initial={isMobile ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.4 }}
-          transition={{ duration: 0.6 }}
+          viewport={{ once: true, amount: isMobile ? 0.1 : 0.4 }}
+          transition={{ duration: isMobile ? 0.1 : 0.6 }}
           className="glass rounded-2xl p-6 border border-border/60"
         >
           <h3 className="text-lg font-semibold tracking-tight mb-4">Skills</h3>
@@ -64,14 +77,26 @@ function SkillTile({
   img,
   iconClass,
 }: { name: string; img?: string; iconClass?: | "Binary" | "Brain" | "Workflow" }) {
+  const [isMobile, setIsMobile] = useState(false)
+  
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768 || /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent))
+    }
+    
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
+
   return (
     <motion.div
       className="group flex flex-col items-center gap-2"
-      initial={{ opacity: 0, y: 10 }}
+      initial={isMobile ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.2 }}
-      transition={{ duration: 0.35 }}
-      whileHover={{ scale: 1.04, y: -2 }}
+      viewport={{ once: true, amount: isMobile ? 0.1 : 0.2 }}
+      transition={{ duration: isMobile ? 0.1 : 0.35 }}
+      whileHover={isMobile ? {} : { scale: 1.04, y: -2 }}
     >
       <div className="rounded-full h-16 w-16 grid place-items-center bg-background/40 backdrop-blur-md shadow-[inset_0_0_0_1px_rgba(255,255,255,0.06)] ring-0 group-hover:ring-2 group-hover:ring-neon transition will-change-transform group-hover:-translate-y-0.5">
         {img ? (

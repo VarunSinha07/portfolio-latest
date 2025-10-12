@@ -113,12 +113,12 @@ export default function Projects() {
               target={p.href ? "_blank" : undefined}
               rel={p.href ? "noopener noreferrer" : undefined}
               className="group block overflow-hidden rounded-2xl glass border border-border/60"
-              initial={{ opacity: 0, y: isMobile ? 8 : 16 }}
+              initial={isMobile ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: isMobile ? 0.2 : 0.4 }}
+              viewport={{ once: true, amount: isMobile ? 0.1 : 0.4 }}
               transition={{
-                duration: isMobile ? 0.3 : 0.5,
-                delay: idx * (isMobile ? 0.03 : 0.06),
+                duration: isMobile ? 0.1 : 0.5,
+                delay: isMobile ? 0 : idx * 0.06,
               }}
             >
               <div className="relative">

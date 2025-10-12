@@ -3,18 +3,31 @@
 import Section from "./section"
 import { motion } from "framer-motion"
 import Image from "next/image"
+import { useEffect, useState } from "react"
 
 export default function Achievements() {
+  const [isMobile, setIsMobile] = useState(false)
+  
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768 || /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent))
+    }
+    
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
+
   return (
     <Section id="achievements" title="Achievements & Certifications" className="scroll-mt-24">
       <div className="grid gap-6 md:grid-cols-2">
         <motion.div
           className="glass rounded-2xl p-0 border border-border/60 overflow-hidden"
-          initial={{ opacity: 0, scale: 0.95 }}
+          initial={isMobile ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.95 }}
           whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true, amount: 0.5 }}
-          transition={{ duration: 0.5 }}
-          whileHover={{ y: -4 }}
+          viewport={{ once: true, amount: isMobile ? 0.1 : 0.5 }}
+          transition={{ duration: isMobile ? 0.1 : 0.5 }}
+          whileHover={isMobile ? {} : { y: -4 }}
         >
             <div className="relative">
             <Image 
@@ -44,11 +57,11 @@ export default function Achievements() {
 
         <motion.div
           className="glass rounded-2xl p-0 border border-border/60 overflow-hidden"
-          initial={{ opacity: 0, y: 10 }}
+          initial={isMobile ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.5 }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-          whileHover={{ y: -4 }}
+          viewport={{ once: true, amount: isMobile ? 0.1 : 0.5 }}
+          transition={{ duration: isMobile ? 0.1 : 0.5, delay: isMobile ? 0 : 0.1 }}
+          whileHover={isMobile ? {} : { y: -4 }}
         >
             <div className="relative">
             <Image
@@ -81,11 +94,11 @@ export default function Achievements() {
         </motion.div>
         <motion.div
           className="glass rounded-2xl p-0 border border-border/60 overflow-hidden"
-          initial={{ opacity: 0, y: 10 }}
+          initial={isMobile ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.5 }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-          whileHover={{ y: -4 }}
+          viewport={{ once: true, amount: isMobile ? 0.1 : 0.5 }}
+          transition={{ duration: isMobile ? 0.1 : 0.5, delay: isMobile ? 0 : 0.1 }}
+          whileHover={isMobile ? {} : { y: -4 }}
         >
             <div className="relative">
             <Image
@@ -118,11 +131,11 @@ export default function Achievements() {
         </motion.div>
         <motion.div
           className="glass rounded-2xl p-0 border border-border/60 overflow-hidden"
-          initial={{ opacity: 0, y: 10 }}
+          initial={isMobile ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.5 }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-          whileHover={{ y: -4 }}
+          viewport={{ once: true, amount: isMobile ? 0.1 : 0.5 }}
+          transition={{ duration: isMobile ? 0.1 : 0.5, delay: isMobile ? 0 : 0.1 }}
+          whileHover={isMobile ? {} : { y: -4 }}
         >
             <div className="relative">
             <Image
