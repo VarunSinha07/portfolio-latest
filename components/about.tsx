@@ -1,24 +1,28 @@
-"use client"
+"use client";
 
-import Section from "./section"
-import { motion } from "framer-motion"
-import { Brain, Binary, Workflow } from "lucide-react"
-import Image from "next/image"
-import { useEffect, useState } from "react"
-
+import Section from "./section";
+import { motion } from "framer-motion";
+import { Brain, Binary, Workflow } from "lucide-react";
+import Image from "next/image";
+import { useEffect, useState } from "react";
 
 export default function About() {
-  const [isMobile, setIsMobile] = useState(false)
-  
+  const [isMobile, setIsMobile] = useState(false);
+
   useEffect(() => {
     const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768 || /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent))
-    }
-    
-    checkMobile()
-    window.addEventListener('resize', checkMobile)
-    return () => window.removeEventListener('resize', checkMobile)
-  }, [])
+      setIsMobile(
+        window.innerWidth < 768 ||
+          /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+            navigator.userAgent
+          )
+      );
+    };
+
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   return (
     <Section id="about" title="About Me" className="scroll-mt-24">
@@ -31,10 +35,17 @@ export default function About() {
           transition={{ duration: isMobile ? 0.1 : 0.6 }}
         >
           <p className="text-pretty leading-relaxed text-muted-foreground">
-            👋 Hi, I’m Varun Sinha, a Full Stack Developer and third-year Computer Science and Engineering student (Batch of 2027). I love building responsive, high-performance web applications that blend great design with solid engineering.
+            👋 Hi, I’m Varun Sinha, a Full Stack Developer and third-year
+            Computer Science and Engineering student (Batch of 2027). I love
+            building responsive, high-performance web applications that blend
+            great design with solid engineering.
           </p>
           <p className="mt-4 text-pretty leading-relaxed text-muted-foreground">
-            I specialize in crafting scalable full-stack architectures, optimizing user experiences, and delivering feature-rich, impactful solutions. With a strong foundation in Data Structures and Algorithms, I enjoy solving complex challenges and continuously learning new technologies to create meaningful digital experiences.
+            I specialize in crafting scalable full-stack architectures,
+            optimizing user experiences, and delivering feature-rich, impactful
+            solutions. With a strong foundation in Data Structures and
+            Algorithms, I enjoy solving complex challenges and continuously
+            learning new technologies to create meaningful digital experiences.
           </p>
         </motion.div>
 
@@ -69,25 +80,34 @@ export default function About() {
         </motion.div>
       </div>
     </Section>
-  )
+  );
 }
 
 function SkillTile({
   name,
   img,
   iconClass,
-}: { name: string; img?: string; iconClass?: | "Binary" | "Brain" | "Workflow" }) {
-  const [isMobile, setIsMobile] = useState(false)
-  
+}: {
+  name: string;
+  img?: string;
+  iconClass?: "Binary" | "Brain" | "Workflow";
+}) {
+  const [isMobile, setIsMobile] = useState(false);
+
   useEffect(() => {
     const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768 || /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent))
-    }
-    
-    checkMobile()
-    window.addEventListener('resize', checkMobile)
-    return () => window.removeEventListener('resize', checkMobile)
-  }, [])
+      setIsMobile(
+        window.innerWidth < 768 ||
+          /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+            navigator.userAgent
+          )
+      );
+    };
+
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   return (
     <motion.div
@@ -117,5 +137,5 @@ function SkillTile({
       </div>
       <div className="text-xs text-center text-muted-foreground">{name}</div>
     </motion.div>
-  )
+  );
 }

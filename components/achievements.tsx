@@ -1,47 +1,60 @@
-"use client"
+"use client";
 
-import Section from "./section"
-import { motion } from "framer-motion"
-import Image from "next/image"
-import { useEffect, useState } from "react"
+import Section from "./section";
+import { motion } from "framer-motion";
+import Image from "next/image";
+import { useEffect, useState } from "react";
 
 export default function Achievements() {
-  const [isMobile, setIsMobile] = useState(false)
-  
+  const [isMobile, setIsMobile] = useState(false);
+
   useEffect(() => {
     const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768 || /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent))
-    }
-    
-    checkMobile()
-    window.addEventListener('resize', checkMobile)
-    return () => window.removeEventListener('resize', checkMobile)
-  }, [])
+      setIsMobile(
+        window.innerWidth < 768 ||
+          /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+            navigator.userAgent
+          )
+      );
+    };
+
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   return (
-    <Section id="achievements" title="Achievements & Certifications" className="scroll-mt-24">
+    <Section
+      id="achievements"
+      title="Achievements & Certifications"
+      className="scroll-mt-24"
+    >
       <div className="grid gap-6 md:grid-cols-2">
         <motion.div
           className="glass rounded-2xl p-0 border border-border/60 overflow-hidden"
-          initial={isMobile ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.95 }}
+          initial={
+            isMobile ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.95 }
+          }
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true, amount: isMobile ? 0.1 : 0.5 }}
           transition={{ duration: isMobile ? 0.1 : 0.5 }}
           whileHover={isMobile ? {} : { y: -4 }}
         >
-            <div className="relative">
-            <Image 
-              src="/images/achievements/hackathon.jpg" 
-              alt="Hackathon award" 
+          <div className="relative">
+            <Image
+              src="/images/achievements/hackathon.jpg"
+              alt="Hackathon award"
               width={400}
               height={176}
-              className="h-60 w-full object-cover" 
+              className="h-60 w-full object-cover"
             />
             <span className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/70 to-transparent" />
-            </div>
+          </div>
           <div className="p-6 text-center">
             <h3 className="text-xl font-semibold">1st Runner Up</h3>
-            <p className="text-muted-foreground">Full Stack Development Hackathon, VIT Chennai</p>
+            <p className="text-muted-foreground">
+              Full Stack Development Hackathon, VIT Chennai
+            </p>
             <div className="mt-4">
               <a
                 href="#"
@@ -60,10 +73,13 @@ export default function Achievements() {
           initial={isMobile ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: isMobile ? 0.1 : 0.5 }}
-          transition={{ duration: isMobile ? 0.1 : 0.5, delay: isMobile ? 0 : 0.1 }}
+          transition={{
+            duration: isMobile ? 0.1 : 0.5,
+            delay: isMobile ? 0 : 0.1,
+          }}
           whileHover={isMobile ? {} : { y: -4 }}
         >
-            <div className="relative">
+          <div className="relative">
             <Image
               src="/certificates/naukri-certificate.png"
               alt="Naukri Campus Young Turks 2025 Merit Certificate"
@@ -72,13 +88,19 @@ export default function Achievements() {
               className="h-60 w-full object-cover"
             />
             <span className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/70 to-transparent" />
-            </div>
+          </div>
           <div className="p-6 text-center">
-            <h3 className="text-xl font-semibold">Naukri Campus Young Turks 2025 Merit Certificate</h3>
+            <h3 className="text-xl font-semibold">
+              Naukri Campus Young Turks 2025 Merit Certificate
+            </h3>
             <div className="mt-2 flex items-center justify-center gap-2 text-muted-foreground text-xs">
-              <span className="glass px-3 py-1 rounded-md border border-border/60">Naukri Campus</span>
+              <span className="glass px-3 py-1 rounded-md border border-border/60">
+                Naukri Campus
+              </span>
               <span>•</span>
-              <span className="glass px-3 py-1 rounded-md border border-border/60">2025</span>
+              <span className="glass px-3 py-1 rounded-md border border-border/60">
+                2025
+              </span>
             </div>
             <div className="mt-4">
               <a
@@ -97,10 +119,13 @@ export default function Achievements() {
           initial={isMobile ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: isMobile ? 0.1 : 0.5 }}
-          transition={{ duration: isMobile ? 0.1 : 0.5, delay: isMobile ? 0 : 0.1 }}
+          transition={{
+            duration: isMobile ? 0.1 : 0.5,
+            delay: isMobile ? 0 : 0.1,
+          }}
           whileHover={isMobile ? {} : { y: -4 }}
         >
-            <div className="relative">
+          <div className="relative">
             <Image
               src="/certificates/dsa-bootcamp-certificate.jpg"
               alt="30 Days DSA Bootcamp"
@@ -109,13 +134,19 @@ export default function Achievements() {
               className="h-60 w-full object-cover"
             />
             <span className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/70 to-transparent" />
-            </div>
+          </div>
           <div className="p-6 text-center">
-            <h3 className="text-xl font-semibold">30 Days DSA Bootcamp course</h3>
+            <h3 className="text-xl font-semibold">
+              30 Days DSA Bootcamp course
+            </h3>
             <div className="mt-2 flex items-center justify-center gap-2 text-muted-foreground text-xs">
-              <span className="glass px-3 py-1 rounded-md border border-border/60">Unstop</span>
+              <span className="glass px-3 py-1 rounded-md border border-border/60">
+                Unstop
+              </span>
               <span>•</span>
-              <span className="glass px-3 py-1 rounded-md border border-border/60">2025</span>
+              <span className="glass px-3 py-1 rounded-md border border-border/60">
+                2025
+              </span>
             </div>
             <div className="mt-4">
               <a
@@ -134,10 +165,13 @@ export default function Achievements() {
           initial={isMobile ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: isMobile ? 0.1 : 0.5 }}
-          transition={{ duration: isMobile ? 0.1 : 0.5, delay: isMobile ? 0 : 0.1 }}
+          transition={{
+            duration: isMobile ? 0.1 : 0.5,
+            delay: isMobile ? 0 : 0.1,
+          }}
           whileHover={isMobile ? {} : { y: -4 }}
         >
-            <div className="relative">
+          <div className="relative">
             <Image
               src="/certificates/data-science-certificate.jpg"
               alt="Data Science Certificate"
@@ -146,13 +180,19 @@ export default function Achievements() {
               className="h-60 w-full object-cover"
             />
             <span className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/70 to-transparent" />
-            </div>
+          </div>
           <div className="p-6 text-center">
-            <h3 className="text-xl font-semibold">The Data Science Course: Complete Data Science Bootcamp 2024</h3>
+            <h3 className="text-xl font-semibold">
+              The Data Science Course: Complete Data Science Bootcamp 2024
+            </h3>
             <div className="mt-2 flex items-center justify-center gap-2 text-muted-foreground text-xs">
-              <span className="glass px-3 py-1 rounded-md border border-border/60">Udemy</span>
+              <span className="glass px-3 py-1 rounded-md border border-border/60">
+                Udemy
+              </span>
               <span>•</span>
-              <span className="glass px-3 py-1 rounded-md border border-border/60">2024</span>
+              <span className="glass px-3 py-1 rounded-md border border-border/60">
+                2024
+              </span>
             </div>
             <div className="mt-4">
               <a
@@ -168,5 +208,5 @@ export default function Achievements() {
         </motion.div>
       </div>
     </Section>
-  )
+  );
 }
