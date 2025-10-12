@@ -2,16 +2,22 @@
 
 /* Reduce animations and transitions on smaller screens */
 @media (max-width: 768px) {
-  /* Force immediate content visibility */
-  [data-mobile-optimized] {
+  /* Force immediate content visibility - ensure all content appears instantly */
+  [data-mobile-optimized],
+  [data-mobile-optimized] * {
     opacity: 1 !important;
     transform: translateY(0) translateX(0) scale(1) !important;
   }
 
-  /* Disable will-change on mobile for better performance */
+  /* Smooth scrolling for better mobile experience */
+  html {
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Optimize rendering performance */
   * {
     will-change: auto !important;
-    -webkit-overflow-scrolling: touch;
   }
 
   /* Reduce transform complexity */
@@ -45,6 +51,28 @@
     animation: none !important;
   }
 
+  /* Ensure Framer Motion animations don't delay content on mobile */
+  section > div {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  /* Force immediate rendering for all sections */
+  section {
+    opacity: 1 !important;
+  }
+
+  /* Optimize project cards */
+  .grid.gap-6 > * {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  /* Optimize images for faster loading */
+  img {
+    content-visibility: auto;
+  }
+
   /* Reduce motion for users who prefer it */
   @media (prefers-reduced-motion: reduce) {
     * {
@@ -70,5 +98,52 @@
   a {
     min-height: 44px;
     min-width: 44px;
+  }
+}
+
+/* Additional mobile optimizations for smooth scrolling */
+@media (max-width: 768px) {
+  /* Prevent layout shift */
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Ensure body doesn't cause scroll issues */
+  body {
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Optimize containers */
+  main {
+    overflow-x: hidden;
+  }
+
+  /* Improve text rendering */
+  h1, h2, h3, h4, h5, h6, p {
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Ensure sections have full visibility */
+  section * {
+    visibility: visible !important;
+  }
+
+  /* Prevent content from being cut off */
+  .grid {
+    overflow: visible;
+  }
+
+  /* Optimize grid layouts for mobile */
+  .grid.gap-6 {
+    grid-template-columns: 1fr;
+  }
+
+  /* Ensure images load properly */
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
   }
 }

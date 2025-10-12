@@ -6,11 +6,14 @@ import Image from "next/image";
 import useIsMobile from "@/hooks/use-is-mobile";
 
 export default function Achievements() {
-  const isMobile = useIsMobile()
+  const isMobile = useIsMobile();
 
   return (
     <Section
-      id="achievements" title="Achievements & Certifications" className="scroll-mt-24" data-mobile-optimized
+      id="achievements"
+      title="Achievements & Certifications"
+      className="scroll-mt-24"
+      data-mobile-optimized
     >
       <div className="grid gap-6 md:grid-cols-2">
         <motion.div
@@ -19,8 +22,8 @@ export default function Achievements() {
             isMobile ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.95 }
           }
           whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true, amount: isMobile ? 0.1 : 0.5 }}
-          transition={{ duration: isMobile ? 0.1 : 0.5 }}
+          viewport={{ once: true, amount: isMobile ? 0.05 : 0.5 }}
+          transition={{ duration: isMobile ? 0.05 : 0.5 }}
           whileHover={isMobile ? {} : { y: -4 }}
         >
           <div className="relative">
@@ -55,9 +58,9 @@ export default function Achievements() {
           className="glass rounded-2xl p-0 border border-border/60 overflow-hidden"
           initial={isMobile ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: isMobile ? 0.1 : 0.5 }}
+          viewport={{ once: true, amount: isMobile ? 0.05 : 0.5 }}
           transition={{
-            duration: isMobile ? 0.1 : 0.5,
+            duration: isMobile ? 0.05 : 0.5,
             delay: isMobile ? 0 : 0.1,
           }}
           whileHover={isMobile ? {} : { y: -4 }}
@@ -101,9 +104,9 @@ export default function Achievements() {
           className="glass rounded-2xl p-0 border border-border/60 overflow-hidden"
           initial={isMobile ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: isMobile ? 0.1 : 0.5 }}
+          viewport={{ once: true, amount: isMobile ? 0.05 : 0.5 }}
           transition={{
-            duration: isMobile ? 0.1 : 0.5,
+            duration: isMobile ? 0.05 : 0.5,
             delay: isMobile ? 0 : 0.1,
           }}
           whileHover={isMobile ? {} : { y: -4 }}
@@ -147,9 +150,9 @@ export default function Achievements() {
           className="glass rounded-2xl p-0 border border-border/60 overflow-hidden"
           initial={isMobile ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: isMobile ? 0.1 : 0.5 }}
+          viewport={{ once: true, amount: isMobile ? 0.05 : 0.5 }}
           transition={{
-            duration: isMobile ? 0.1 : 0.5,
+            duration: isMobile ? 0.05 : 0.5,
             delay: isMobile ? 0 : 0.1,
           }}
           whileHover={isMobile ? {} : { y: -4 }}

@@ -82,7 +82,7 @@ const items = [
 ];
 
 export default function Experience() {
-  const isMobile = useIsMobile()
+  const isMobile = useIsMobile();
 
   return (
     <Section id="experience" title="Experience" data-mobile-optimized>
@@ -98,9 +98,9 @@ export default function Experience() {
               key={idx}
               initial={isMobile ? { opacity: 1, y: 0 } : { opacity: 0, y: 14 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: isMobile ? 0.1 : 0.4 }}
+              viewport={{ once: true, amount: isMobile ? 0.05 : 0.4 }}
               transition={{
-                duration: isMobile ? 0.1 : 0.5,
+                duration: isMobile ? 0.05 : 0.5,
                 delay: isMobile ? 0 : idx * 0.06,
               }}
               className="relative pl-12"

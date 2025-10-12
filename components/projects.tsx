@@ -59,7 +59,7 @@ type Filter = (typeof filters)[number];
 
 export default function Projects() {
   const [active, setActive] = useState<Filter>("All");
-  const isMobile = useIsMobile()
+  const isMobile = useIsMobile();
 
   const list = useMemo(
     () =>
@@ -72,7 +72,12 @@ export default function Projects() {
   );
 
   return (
-    <Section id="projects" title="Projects" className="scroll-mt-24" data-mobile-optimized>
+    <Section
+      id="projects"
+      title="Projects"
+      className="scroll-mt-24"
+      data-mobile-optimized
+    >
       <div className="mb-6 flex flex-wrap gap-2">
         {filters.map((f) => (
           <Button
@@ -101,9 +106,9 @@ export default function Projects() {
               className="group block overflow-hidden rounded-2xl glass border border-border/60"
               initial={isMobile ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: isMobile ? 0.1 : 0.4 }}
+              viewport={{ once: true, amount: isMobile ? 0.05 : 0.4 }}
               transition={{
-                duration: isMobile ? 0.1 : 0.5,
+                duration: isMobile ? 0.05 : 0.5,
                 delay: isMobile ? 0 : idx * 0.06,
               }}
             >

@@ -10,14 +10,19 @@ export default function Education() {
   const isMobile = useIsMobile();
 
   return (
-    <Section id="education" title="Education" className="scroll-mt-24" data-mobile-optimized>
+    <Section
+      id="education"
+      title="Education"
+      className="scroll-mt-24"
+      data-mobile-optimized
+    >
       <TiltCard className="rounded-2xl card-gradient-border">
         <motion.div
           className="glass rounded-2xl p-6 border border-border/60"
           initial={isMobile ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: isMobile ? 0.1 : 0.5 }}
-          transition={{ duration: isMobile ? 0.1 : 0.5 }}
+          viewport={{ once: true, amount: isMobile ? 0.05 : 0.5 }}
+          transition={{ duration: isMobile ? 0.05 : 0.5 }}
         >
           <div className="flex items-center gap-4">
             <Image
@@ -51,10 +56,10 @@ export default function Education() {
         <TiltCard className="rounded-2xl card-gradient-border">
           <motion.div
             className="glass rounded-2xl p-6 border border-border/60"
-            initial={{ opacity: 0, y: 12 }}
+            initial={isMobile ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.5 }}
-            transition={{ duration: 0.5 }}
+            viewport={{ once: true, amount: isMobile ? 0.05 : 0.5 }}
+            transition={{ duration: isMobile ? 0.05 : 0.5 }}
           >
             <div className="flex items-center gap-4">
               <Image
