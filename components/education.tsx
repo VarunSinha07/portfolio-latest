@@ -44,10 +44,6 @@ export default function Education() {
           </div>
           <div className="mt-4 grid gap-1 text-sm text-muted-foreground">
             <p>GPA: 9.77 CGPA</p>
-            <p>
-              Focus: Scalable systems, data pipelines, and full-stack
-              engineering
-            </p>
           </div>
         </motion.div>
       </TiltCard>
