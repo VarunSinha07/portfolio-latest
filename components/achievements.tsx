@@ -28,7 +28,7 @@ export default function Achievements() {
         >
           <div className="relative">
             <Image
-              src="/images/achievements/hackathon.jpg"
+              src="/certificates/hackathon-certificate.jpg"
               alt="Hackathon award"
               width={400}
               height={176}
@@ -43,7 +43,7 @@ export default function Achievements() {
             </p>
             <div className="mt-4">
               <a
-                href="#"
+                href="/certificates/hackathon-certificate.jpg"
                 className="text-xs glass px-3 py-1 rounded-md border border-border/60 hover:neon transition inline-block"
                 target="_blank"
                 rel="noreferrer"
