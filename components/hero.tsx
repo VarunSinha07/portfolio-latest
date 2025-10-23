@@ -145,7 +145,6 @@ export default function Hero() {
               src="/varun-pic.jpg"
               alt="Portrait of Varun Sinha"
               className="absolute inset-0 h-full w-full object-cover object-[center_25%] min-h-full min-w-full"
-              style={{ transform: "scale(1.15)" }}
               whileHover={isMobile ? {} : { scale: 1.21, rotate: 1.5 }}
               whileTap={isMobile ? {} : { scale: 1.17 }}
               transition={
