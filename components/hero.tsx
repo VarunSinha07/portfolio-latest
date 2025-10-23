@@ -68,7 +68,7 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.35, duration: 0.6 }}
           >
-            <Typewriter text="Crafting seamless digital experiences from backend logic to frontend magic." />
+            <Typewriter text="Building seamless digital experiences — from robust backends to stunning frontends." />
           </motion.p>
 
           <motion.div
