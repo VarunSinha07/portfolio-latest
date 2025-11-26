@@ -53,6 +53,52 @@ export default function Achievements() {
             </div>
           </div>
         </motion.div>
+        <motion.div
+          className="glass rounded-2xl p-0 border border-border/60 overflow-hidden"
+          initial={isMobile ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: isMobile ? 0.05 : 0.5 }}
+          transition={{
+            duration: isMobile ? 0.05 : 0.5,
+            delay: isMobile ? 0 : 0.1,
+          }}
+          whileHover={isMobile ? {} : { y: -4 }}
+        >
+          <div className="relative">
+            <Image
+              src="/certificates/NPTEL-certificate.png"
+              alt="NPTEL Big Data Computing Certificate"
+              width={400}
+              height={300}
+              className="h-60 w-full object-cover"
+            />
+            <span className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/70 to-transparent" />
+          </div>
+          <div className="p-6 text-center">
+            <h3 className="text-xl font-semibold">
+              NPTEL Big Data Computing GOLD + Elite TOP 1% Certificate
+            </h3>
+            <div className="mt-2 flex items-center justify-center gap-2 text-muted-foreground text-xs">
+              <span className="glass px-3 py-1 rounded-md border border-border/60">
+                NPTEL
+              </span>
+              <span>•</span>
+              <span className="glass px-3 py-1 rounded-md border border-border/60">
+                2025
+              </span>
+            </div>
+            <div className="mt-4">
+              <a
+                href="/certificates/NPTEL-certificate.png"
+                className="text-xs glass px-3 py-1 rounded-md border border-border/60 hover:neon transition inline-block"
+                target="_blank"
+                rel="noreferrer"
+              >
+                View Certificate
+              </a>
+            </div>
+          </div>
+        </motion.div>
 
         <motion.div
           className="glass rounded-2xl p-0 border border-border/60 overflow-hidden"
