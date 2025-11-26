@@ -90,7 +90,7 @@ export default function Hero() {
               className="neon text-white hover:text-black neon-hover glass border border-border/60"
             >
               <a
-                href="/varun-sinha-resume.pdf"
+                href="/Varun-Sinha-Resume.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
               >
