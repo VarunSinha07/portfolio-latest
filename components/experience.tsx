@@ -7,26 +7,6 @@ import useIsMobile from "@/hooks/use-is-mobile";
 const items = [
   {
     role: "Backend Developer Intern",
-    org: "SAARC Masts Tech Pvt Ltd",
-    date: "June 2025 - Oct 2025",
-    bullets: [
-      "Built REST APIsBuilding solutions for Mentor-Student Networking along with Student Progress Tracking System for universities.",
-      "Implemented Dashboards for Mentors, Students and Admins with a highly intelligent system that matches students and mentors based on their specific skill sets, scores and slot availability for 1-1 interactions among others.",
-    ],
-    stack: [
-      "Next.js",
-      "Typescript",
-      "PostgreSQL",
-      "Prisma ORM",
-      "VSCode",
-      "NeonDB",
-      "BetterAuth",
-      "Docker",
-      "GitHub",
-    ],
-  },
-  {
-    role: "Backend Developer Intern",
     org: "NIT Hamirpur",
     date: "February 2025 - April 2025",
     bullets: [
