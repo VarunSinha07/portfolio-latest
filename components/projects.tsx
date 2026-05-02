@@ -18,39 +18,32 @@ type Project = {
 
 const projects: Project[] = [
   {
+    title: "PrakSat",
+    desc: "A scalable multi-tenant air quality forecasting SaaS platform with role-based access, credit-based API monetization, and interactive time-series dashboards.",
+    href: "https://drive.google.com/file/d/1VgOs2-xuNvw_hiDEwBo4DXouJeeAfh3P/view?usp=sharing",
+    tags: ["Full Stack", "Frontend", "Backend"],
+    img: "/projects/praksat.jpg", 
+  },
+  {
+    title: "Zit",
+    desc: "A terminal-based AI Git assistant in Rust with an interactive TUI, enabling real-time debugging, workflow automation, and intelligent developer guidance.",
+    href: "https://main.dg6ahogo2wxtk.amplifyapp.com/",
+    tags: ["Backend"],
+    img: "/projects/zit.png", 
+  },
+  {
+  title: "VyaparFlow",
+  desc: "A full-stack business management platform that streamlines inventory tracking, billing, and financial workflows with real-time data insights, enabling small businesses to manage operations efficiently.",
+  href: "https://vyaparflow.vercel.app/",
+  tags: ["Full Stack"],
+  img: "/projects/vyaparflow.png",
+  },
+  {
     title: "IFIA Bharat",
-    desc: "Developed the official website for IFIA Bharat. Implemented the full frontend and backend solution supporting million hits per second with low latency and high availability.",
+    desc: "Developed the official website for IFIA Bharat. Implemented the full frontend and backend solution with scalable CI/CD pipelines enabling fast releases.",
     href: "https://ifiabharat.com",
     tags: ["Full Stack", "Frontend", "Backend"],
     img: "/projects/IFIA-bharat.png",
-  },
-  {
-    title: "Media Nexus",
-    desc: "Full-stack app for SRM Group offering specialized Certificate Programs in Media Studies, empowering the next generation of storytellers and media professionals through hands-on learning, industry insights, and creative excellence.",
-    href: "https://media-nexus.vercel.app/",
-    tags: ["Full Stack", "Frontend", "Backend"],
-    img: "/projects/media-nexus-logo.png",
-  },
-  {
-    title: "BioVerse - Biotech Startup Incubator",
-    desc: "Incubation platform for biotech startups: onboarding, mentorship, and resource tracking.",
-    href: "https://bio-verse.vercel.app/",
-    tags: ["Backend"],
-    img: "/projects/bioverse.png",
-  },
-  {
-    title: "TechTransfer",
-    desc: "A one-stop platform for researchers, startups, and industries to collaborate, commercialize technologies, and solve real-world challenges.",
-    href: "https://tech-transfer.vercel.app/",
-    tags: ["Backend"],
-    img: "/projects/techtransfer.png",
-  },
-  {
-    title: "GoFest - College Event Platform",
-    desc: "Hackathon project: event creation, registration, scheduling, team collab. Runner-up (TechnoVIT).",
-    href: "https://go-fest.vercel.app/",
-    tags: ["Full Stack", "Frontend", "Backend"],
-    img: "/projects/goFest.png",
   },
 ];
 
@@ -66,9 +59,9 @@ export default function Projects() {
       projects.filter(
         (p) =>
           active === "All" ||
-          p.tags.includes(active as "Frontend" | "Backend" | "Full Stack")
+          p.tags.includes(active as "Frontend" | "Backend" | "Full Stack"),
       ),
-    [active]
+    [active],
   );
 
   return (

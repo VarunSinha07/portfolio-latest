@@ -45,23 +45,22 @@ export default function About() {
         <h3 className="text-lg font-semibold tracking-tight mb-4">Skills</h3>
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 sm:gap-6">
           <SkillTile name="C++" img="/icons/cpp.jpg" />
+          <SkillTile name="Python" img="/icons/python.png" />
+          <SkillTile name="Rust" img="/icons/rust.png" />
           <SkillTile name="TypeScript" img="/icons/typescript.png" />
           <SkillTile name="JavaScript" img="/icons/javascript.png" />
           <SkillTile name="React.js" img="/icons/react.jpg" />
-          <SkillTile name="HTML5" img="/icons/html.png" />
-          <SkillTile name="CSS" img="/icons/css3.png" />
           <SkillTile name="Next.js" img="/icons/nextjs.png" />
-          <SkillTile name="Tailwind CSS" img="/icons/tailwind.png" />
           <SkillTile name="Node.js" img="/icons/node.png" />
           <SkillTile name="Express.js" img="/icons/express.png" />
-          <SkillTile name="SQL (PostgreSQL)" img="/icons/postgres.png" />
-          <SkillTile name="NoSQL (MongoDB)" img="/icons/mongodb.png" />
-          <SkillTile name="Object-Oriented Design" img="/icons/oop.png" />
-          <SkillTile name="Data Structures" iconClass="Binary" />
-          <SkillTile name="Problem Solving" iconClass="Brain" />
-          <SkillTile name="Agile Methodologies" iconClass="Workflow" />
-          <SkillTile name="Git (Version Control)" img="/icons/git.png" />
+          <SkillTile name="FastAPI" img="/icons/fastapi.png" />
+          <SkillTile name="PostgreSQL" img="/icons/postgres.png" />
+          <SkillTile name="MongoDB" img="/icons/mongodb.png" />
+          <SkillTile name="Redis" img="/icons/redis.png" />
+          <SkillTile name="Git" img="/icons/git.png" />
           <SkillTile name="Docker" img="/icons/docker.png" />
+          <SkillTile name="Data Structures" img="/icons/dsa.jpg" />
+          <SkillTile name="Distributed Systems" img="/icons/distributed-systems.png" />
         </div>
       </motion.div>
     </Section>
@@ -84,8 +83,8 @@ function SkillTile({
       setIsMobile(
         window.innerWidth < 768 ||
           /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-            navigator.userAgent
-          )
+            navigator.userAgent,
+          ),
       );
     };
 
@@ -120,7 +119,9 @@ function SkillTile({
           <Workflow className="h-5 w-5 sm:h-6 sm:w-6" />
         )}
       </div>
-      <div className="text-[10px] sm:text-xs text-center text-muted-foreground leading-tight">{name}</div>
+      <div className="text-[10px] sm:text-xs text-center text-muted-foreground leading-tight">
+        {name}
+      </div>
     </motion.div>
   );
 }

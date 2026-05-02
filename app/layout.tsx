@@ -8,7 +8,7 @@ import "./mobile-optimizations.css";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Varun Sinha | Full Stack Developer | Backend Engineer",
+  title: "Varun Sinha | Software Developer | Backend Engineer",
   description: "Developed by Varun Sinha",
   viewport: {
     width: "device-width",

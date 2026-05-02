@@ -43,7 +43,7 @@ export default function Education() {
             </div>
           </div>
           <div className="mt-4 grid gap-1 text-sm text-muted-foreground">
-            <p>GPA: 9.77 CGPA</p>
+            <p>GPA: 9.79 CGPA</p>
           </div>
         </motion.div>
       </TiltCard>
