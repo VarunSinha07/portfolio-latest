@@ -60,7 +60,7 @@ export default function About() {
           <SkillTile name="Git" img="/icons/git.png" />
           <SkillTile name="Docker" img="/icons/docker.png" />
           <SkillTile name="Data Structures" img="/icons/dsa.jpg" />
-          <SkillTile name="Distributed Systems" img="/icons/distributed-systems.png" />
+          <SkillTile name="Distributed Systems" img="/icons/distributed-systems.jpg" />
         </div>
       </motion.div>
     </Section>
