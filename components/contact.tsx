@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { Mail, Github, Linkedin, RotateCcw } from "lucide-react";
+import SocialDock from "./social-dock";
 
 type LogLine = {
   type: "system" | "command" | "output";
@@ -224,6 +225,11 @@ export default function Contact() {
             </button>
           </div>
 
+        </div>
+
+        {/* Mobile-only static social dock */}
+        <div className="mt-8 md:hidden flex justify-center">
+          <SocialDock inline />
         </div>
 
       </div>

@@ -214,12 +214,16 @@ export default function Resume() {
   ]);
   const [isTerminalRunning, setIsTerminalRunning] = useState(false);
 
-  const terminalContainerRef = useRef<HTMLDivElement | null>(null);
+  const desktopTerminalRef = useRef<HTMLDivElement>(null);
+  const mobileTerminalRef = useRef<HTMLDivElement>(null);
 
   // Auto-scroll terminal to bottom without scrolling browser window
   useEffect(() => {
-    if (terminalContainerRef.current) {
-      terminalContainerRef.current.scrollTop = terminalContainerRef.current.scrollHeight;
+    if (desktopTerminalRef.current) {
+      desktopTerminalRef.current.scrollTop = desktopTerminalRef.current.scrollHeight;
+    }
+    if (mobileTerminalRef.current) {
+      mobileTerminalRef.current.scrollTop = mobileTerminalRef.current.scrollHeight;
     }
   }, [terminalLogs]);
 
@@ -368,6 +372,83 @@ export default function Resume() {
     }
   };
 
+  const renderTerminal = (termRef: React.RefObject<HTMLDivElement>, isMobile: boolean) => {
+    return (
+      <div className={`border-t border-white/10 bg-black/90 flex flex-col h-[280px] ${isMobile ? "lg:hidden" : "hidden lg:flex"}`}>
+        
+        {/* Terminal Pane Header */}
+        <div className="flex items-center justify-between px-4 py-2 border-b border-white/5 bg-zinc-950/90 text-2xs font-mono text-zinc-500">
+          <span className="flex items-center gap-1.5">
+            <Terminal className="h-3.5 w-3.5 text-brand" />
+            <span>bash (terminal)</span>
+          </span>
+          <div className="flex items-center gap-2">
+            {isTerminalRunning && (
+              <Loader2 className="h-3 w-3 text-brand animate-spin" />
+            )}
+            <span className="text-zinc-600">[tty/1]</span>
+          </div>
+        </div>
+
+        {/* Simulated CLI Output Screen */}
+        <div
+          ref={termRef}
+          className="flex-1 p-4 font-mono text-3xs text-zinc-400 overflow-y-auto space-y-1.5 custom-scrollbar select-text"
+        >
+          {terminalLogs.map((log, index) => {
+            let textClass = "";
+            if (log.startsWith("$")) textClass = "text-white font-semibold";
+            else if (log.startsWith("[SUCCESS]")) textClass = "text-brand font-medium";
+            else if (log.startsWith("[INFO]")) textClass = "text-zinc-500";
+            else if (log.includes("✓")) textClass = "text-emerald-400";
+            else if (log.startsWith("PASS")) textClass = "text-emerald-950 bg-emerald-500/90 px-1 rounded font-bold";
+            return (
+              <div key={index} className={`leading-relaxed ${textClass}`}>
+                {log}
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Console Action Bar / Commands (Redesigned: Large, Clear Buttons) */}
+        <div className="p-3 border-t border-white/10 bg-zinc-950/80 space-y-2">
+          <div className="grid grid-cols-2 gap-2">
+            {/* Download Button */}
+            <button
+              onClick={() => runScript("download")}
+              disabled={isTerminalRunning}
+              className="flex items-center justify-center gap-2 px-3 py-2.5 rounded-lg border border-white/10 bg-zinc-900 hover:bg-zinc-800 hover:border-brand/40 text-xs font-mono text-zinc-300 hover:text-white disabled:opacity-50 disabled:pointer-events-none transition duration-200 group shadow-md"
+            >
+              <Download className="h-4 w-4 group-hover:text-brand transition-colors" />
+              <span>Download PDF</span>
+            </button>
+
+            {/* Open PDF Button */}
+            <button
+              onClick={() => runScript("open")}
+              disabled={isTerminalRunning}
+              className="flex items-center justify-center gap-2 px-3 py-2.5 rounded-lg border border-white/10 bg-zinc-900 hover:bg-zinc-800 hover:border-brand/40 text-xs font-mono text-zinc-300 hover:text-white disabled:opacity-50 disabled:pointer-events-none transition duration-200 group shadow-md"
+            >
+              <ExternalLink className="h-4 w-4 group-hover:text-brand transition-colors" />
+              <span>Open PDF</span>
+            </button>
+          </div>
+
+          {/* Diagnostics Button */}
+          <button
+            onClick={() => runScript("test")}
+            disabled={isTerminalRunning}
+            className="flex items-center justify-center gap-2 w-full px-3 py-2.5 rounded-lg border border-white/10 bg-zinc-900/60 hover:bg-zinc-900 hover:border-accent/40 text-xs font-mono text-zinc-400 hover:text-white disabled:opacity-50 disabled:pointer-events-none transition duration-200 group shadow-sm"
+          >
+            <Play className="h-3.5 w-3.5 group-hover:text-accent transition-colors" />
+            <span>Run System Diagnostics</span>
+          </button>
+        </div>
+
+      </div>
+    );
+  };
+
   // Split lines of code for line numbers gutter
   const fileLines = FILES[activeFile].content.split("\n");
   if (fileLines[fileLines.length - 1] === "") {
@@ -498,83 +579,8 @@ export default function Resume() {
                   })}
                 </div>
               </div>
-
-              {/* ----------------------------------------------------
-                  Integrated Terminal console
-                  ---------------------------------------------------- */}
-              <div className="border-t border-white/10 bg-black/90 flex flex-col h-[280px]">
-                
-                {/* Terminal Pane Header */}
-                <div className="flex items-center justify-between px-4 py-2 border-b border-white/5 bg-zinc-950/90 text-2xs font-mono text-zinc-500">
-                  <span className="flex items-center gap-1.5">
-                    <Terminal className="h-3.5 w-3.5 text-brand" />
-                    <span>bash (terminal)</span>
-                  </span>
-                  <div className="flex items-center gap-2">
-                    {isTerminalRunning && (
-                      <Loader2 className="h-3 w-3 text-brand animate-spin" />
-                    )}
-                    <span className="text-zinc-600">[tty/1]</span>
-                  </div>
-                </div>
-
-                {/* Simulated CLI Output Screen */}
-                <div
-                  ref={terminalContainerRef}
-                  className="flex-1 p-4 font-mono text-3xs text-zinc-400 overflow-y-auto space-y-1.5 custom-scrollbar select-text"
-                >
-                  {terminalLogs.map((log, index) => {
-                    let textClass = "";
-                    if (log.startsWith("$")) textClass = "text-white font-semibold";
-                    else if (log.startsWith("[SUCCESS]")) textClass = "text-brand font-medium";
-                    else if (log.startsWith("[INFO]")) textClass = "text-zinc-500";
-                    else if (log.includes("✓")) textClass = "text-emerald-400";
-                    else if (log.startsWith("PASS")) textClass = "text-emerald-950 bg-emerald-500/90 px-1 rounded font-bold";
-                    return (
-                      <div key={index} className={`leading-relaxed ${textClass}`}>
-                        {log}
-                      </div>
-                    );
-                  })}
-                </div>
-
-                {/* Console Action Bar / Commands (Redesigned: Large, Clear Buttons) */}
-                <div className="p-3 border-t border-white/10 bg-zinc-950/80 space-y-2">
-                  <div className="grid grid-cols-2 gap-2">
-                    {/* Download Button */}
-                    <button
-                      onClick={() => runScript("download")}
-                      disabled={isTerminalRunning}
-                      className="flex items-center justify-center gap-2 px-3 py-2.5 rounded-lg border border-white/10 bg-zinc-900 hover:bg-zinc-800 hover:border-brand/40 text-xs font-mono text-zinc-300 hover:text-white disabled:opacity-50 disabled:pointer-events-none transition duration-200 group shadow-md"
-                    >
-                      <Download className="h-4 w-4 group-hover:text-brand transition-colors" />
-                      <span>Download PDF</span>
-                    </button>
-
-                    {/* Open PDF Button */}
-                    <button
-                      onClick={() => runScript("open")}
-                      disabled={isTerminalRunning}
-                      className="flex items-center justify-center gap-2 px-3 py-2.5 rounded-lg border border-white/10 bg-zinc-900 hover:bg-zinc-800 hover:border-brand/40 text-xs font-mono text-zinc-300 hover:text-white disabled:opacity-50 disabled:pointer-events-none transition duration-200 group shadow-md"
-                    >
-                      <ExternalLink className="h-4 w-4 group-hover:text-brand transition-colors" />
-                      <span>Open PDF</span>
-                    </button>
-                  </div>
-
-                  {/* Diagnostics Button */}
-                  <button
-                    onClick={() => runScript("test")}
-                    disabled={isTerminalRunning}
-                    className="flex items-center justify-center gap-2 w-full px-3 py-2.5 rounded-lg border border-white/10 bg-zinc-900/60 hover:bg-zinc-900 hover:border-accent/40 text-xs font-mono text-zinc-400 hover:text-white disabled:opacity-50 disabled:pointer-events-none transition duration-200 group shadow-sm"
-                  >
-                    <Play className="h-3.5 w-3.5 group-hover:text-accent transition-colors" />
-                    <span>Run System Diagnostics</span>
-                  </button>
-                </div>
-
-              </div>
-
+              {/* Desktop-only Integrated Terminal console */}
+              {renderTerminal(desktopTerminalRef, false)}
             </div>
 
             {/* ----------------------------------------------------
@@ -587,9 +593,9 @@ export default function Resume() {
                 
                 {/* Active path breadcrumbs */}
                 <div className="flex items-center gap-1.5 font-mono text-2xs text-zinc-500">
-                  <Folder className="h-3.5 w-3.5 text-zinc-600 fill-zinc-600/10" />
-                  <span>resume_data</span>
-                  <span className="text-zinc-700">/</span>
+                  <Folder className="h-3.5 w-3.5 text-zinc-600 fill-zinc-600/10 hidden sm:inline-block" />
+                  <span className="hidden sm:inline-block">resume_data</span>
+                  <span className="text-zinc-700 hidden sm:inline-block">/</span>
                   <span className="text-zinc-300 font-medium">{activeFile}</span>
                 </div>
 
@@ -599,27 +605,27 @@ export default function Resume() {
                   {/* Code View button */}
                   <button
                     onClick={() => setViewMode("code")}
-                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md transition-colors ${
+                    className={`flex items-center gap-1 px-2 py-1 sm:gap-1.5 sm:px-3 sm:py-1.5 rounded-md transition-colors ${
                       viewMode === "code"
                         ? "bg-zinc-800 text-white font-bold"
                         : "text-zinc-500 hover:text-zinc-300"
                     }`}
                   >
                     <Code className="h-3 w-3" />
-                    <span>Code</span>
+                    <span className="hidden sm:inline-block">Code</span>
                   </button>
 
                   {/* Rendered Preview button */}
                   <button
                     onClick={() => setViewMode("preview")}
-                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md transition-colors ${
+                    className={`flex items-center gap-1 px-2 py-1 sm:gap-1.5 sm:px-3 sm:py-1.5 rounded-md transition-colors ${
                       viewMode === "preview"
                         ? "bg-zinc-800 text-white font-bold"
                         : "text-zinc-500 hover:text-zinc-300"
                     }`}
                   >
                     <Eye className="h-3 w-3" />
-                    <span>Preview</span>
+                    <span className="hidden sm:inline-block">Preview</span>
                   </button>
 
                 </div>
@@ -981,6 +987,9 @@ export default function Resume() {
                 )}
 
               </div>
+
+              {/* Mobile-only Integrated Terminal console */}
+              {renderTerminal(mobileTerminalRef, true)}
 
             </div>
 
