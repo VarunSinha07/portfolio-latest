@@ -18,7 +18,7 @@ import {
   Cpu,
   Layers,
   Wrench,
-  Sparkles,
+  Award,
 } from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -26,7 +26,11 @@ gsap.registerPlugin(ScrollTrigger);
 // ----------------------------------------------------
 // Mock Files Data
 // ----------------------------------------------------
-type FileName = "summary.md" | "experience.json" | "education.json" | "skills.yml";
+type FileName =
+  | "summary.md"
+  | "experience.json"
+  | "education.json"
+  | "skills.yml";
 
 const FILES: Record<
   FileName,
@@ -179,23 +183,38 @@ function highlightCode(code: string, language: string) {
           cls = "text-cyan-400 font-mono"; // Numbers
         }
         return `<span class="${cls}">${match}</span>`;
-      }
+      },
     );
   }
 
   if (language === "yaml") {
     return escaped
-      .replace(/^(\s*)([^#\-\n]+?)(:)/gm, '$1<span class="text-zinc-400 font-medium">$2</span>$3')
+      .replace(
+        /^(\s*)([^#\-\n]+?)(:)/gm,
+        '$1<span class="text-zinc-400 font-medium">$2</span>$3',
+      )
       .replace(/(-\s+)(.*)$/gm, '$1<span class="text-brand">$2</span>')
       .replace(/(#.*)$/gm, '<span class="text-zinc-500 italic">$1</span>');
   }
 
   if (language === "markdown") {
     return escaped
-      .replace(/^(#{1,6}\s+)(.*)$/gm, '<span class="text-accent font-black">$1$2</span>')
-      .replace(/^(\s*[-*+]\s+)(.*)$/gm, '$1<span class="text-zinc-300">$2</span>')
-      .replace(/(\*\*|__)(.*?)\1/g, '<strong class="text-white font-bold">$2</strong>')
-      .replace(/(`)(.*?)\1/g, '<code class="bg-zinc-900/60 px-1 py-0.5 rounded border border-white/5 text-brand">$2</code>');
+      .replace(
+        /^(#{1,6}\s+)(.*)$/gm,
+        '<span class="text-accent font-black">$1$2</span>',
+      )
+      .replace(
+        /^(\s*[-*+]\s+)(.*)$/gm,
+        '$1<span class="text-zinc-300">$2</span>',
+      )
+      .replace(
+        /(\*\*|__)(.*?)\1/g,
+        '<strong class="text-white font-bold">$2</strong>',
+      )
+      .replace(
+        /(`)(.*?)\1/g,
+        '<code class="bg-zinc-900/60 px-1 py-0.5 rounded border border-white/5 text-brand">$2</code>',
+      );
   }
 
   return escaped;
@@ -220,10 +239,12 @@ export default function Resume() {
   // Auto-scroll terminal to bottom without scrolling browser window
   useEffect(() => {
     if (desktopTerminalRef.current) {
-      desktopTerminalRef.current.scrollTop = desktopTerminalRef.current.scrollHeight;
+      desktopTerminalRef.current.scrollTop =
+        desktopTerminalRef.current.scrollHeight;
     }
     if (mobileTerminalRef.current) {
-      mobileTerminalRef.current.scrollTop = mobileTerminalRef.current.scrollHeight;
+      mobileTerminalRef.current.scrollTop =
+        mobileTerminalRef.current.scrollHeight;
     }
   }, [terminalLogs]);
 
@@ -244,7 +265,7 @@ export default function Resume() {
               start: "top 80%",
               toggleActions: "play none none none",
             },
-          }
+          },
         );
       }
     }, containerRef);
@@ -275,7 +296,10 @@ export default function Resume() {
         setTerminalLogs((prev) => {
           const next = [...prev];
           const lastLine = next[next.length - 1];
-          const bar = "=".repeat(currentProgress / 5) + ">" + " ".repeat(20 - currentProgress / 5);
+          const bar =
+            "=".repeat(currentProgress / 5) +
+            ">" +
+            " ".repeat(20 - currentProgress / 5);
           const barText = `[${bar}] ${currentProgress}%`;
 
           if (lastLine.startsWith("[")) {
@@ -372,10 +396,14 @@ export default function Resume() {
     }
   };
 
-  const renderTerminal = (termRef: React.RefObject<HTMLDivElement>, isMobile: boolean) => {
+  const renderTerminal = (
+    termRef: React.RefObject<HTMLDivElement>,
+    isMobile: boolean,
+  ) => {
     return (
-      <div className={`border-t border-white/10 bg-black/90 flex flex-col h-[280px] ${isMobile ? "lg:hidden" : "hidden lg:flex"}`}>
-        
+      <div
+        className={`border-t border-white/10 bg-black/90 flex flex-col h-[280px] ${isMobile ? "lg:hidden" : "hidden lg:flex"}`}
+      >
         {/* Terminal Pane Header */}
         <div className="flex items-center justify-between px-4 py-2 border-b border-white/5 bg-zinc-950/90 text-2xs font-mono text-zinc-500">
           <span className="flex items-center gap-1.5">
@@ -398,10 +426,13 @@ export default function Resume() {
           {terminalLogs.map((log, index) => {
             let textClass = "";
             if (log.startsWith("$")) textClass = "text-white font-semibold";
-            else if (log.startsWith("[SUCCESS]")) textClass = "text-brand font-medium";
+            else if (log.startsWith("[SUCCESS]"))
+              textClass = "text-brand font-medium";
             else if (log.startsWith("[INFO]")) textClass = "text-zinc-500";
             else if (log.includes("✓")) textClass = "text-emerald-400";
-            else if (log.startsWith("PASS")) textClass = "text-emerald-950 bg-emerald-500/90 px-1 rounded font-bold";
+            else if (log.startsWith("PASS"))
+              textClass =
+                "text-emerald-950 bg-emerald-500/90 px-1 rounded font-bold";
             return (
               <div key={index} className={`leading-relaxed ${textClass}`}>
                 {log}
@@ -444,7 +475,6 @@ export default function Resume() {
             <span>Run System Diagnostics</span>
           </button>
         </div>
-
       </div>
     );
   };
@@ -462,7 +492,9 @@ export default function Resume() {
       className="py-24 border-t border-white/5 bg-[#000000] scroll-mt-20 relative overflow-hidden"
     >
       {/* Custom scrollbars stylesheet injection */}
-      <style dangerouslySetInnerHTML={{ __html: `
+      <style
+        dangerouslySetInnerHTML={{
+          __html: `
         .custom-scrollbar::-webkit-scrollbar {
           width: 5px;
           height: 5px;
@@ -482,7 +514,9 @@ export default function Resume() {
           scrollbar-width: thin;
           scrollbar-color: rgba(255, 255, 255, 0.1) rgba(0, 0, 0, 0.3);
         }
-      ` }} />
+      `,
+        }}
+      />
       {/* Background cyber accent gradients */}
       <div className="absolute top-1/4 left-1/10 w-96 h-96 bg-brand/5 blur-[120px] rounded-full pointer-events-none" />
       <div className="absolute bottom-1/4 right-1/10 w-96 h-96 bg-accent/5 blur-[120px] rounded-full pointer-events-none" />
@@ -503,7 +537,6 @@ export default function Resume() {
             Futuristic Workspace Window
             ---------------------------------------------------- */}
         <div className="workspace-window glass rounded-2xl border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.8)] overflow-hidden transition-all duration-300">
-          
           {/* Editor Header Bar */}
           <div className="flex items-center justify-between px-4 py-3 bg-zinc-950/80 border-b border-white/10 select-none">
             {/* Window control buttons */}
@@ -512,7 +545,7 @@ export default function Resume() {
               <span className="w-3 h-3 rounded-full bg-amber-500/80" />
               <span className="w-3 h-3 rounded-full bg-emerald-500/80" />
             </div>
-            
+
             {/* Window title tab */}
             <div className="text-xs font-mono text-zinc-500 flex items-center gap-1.5">
               <Terminal className="h-3 w-3 text-zinc-600" />
@@ -524,19 +557,19 @@ export default function Resume() {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-12 items-stretch min-h-[600px]">
-            
             {/* ----------------------------------------------------
                 Left Panel (Explorer Sidebar + Console)
                 ---------------------------------------------------- */}
             <div className="lg:col-span-4 flex flex-col border-b lg:border-b-0 lg:border-r border-white/10 bg-zinc-950/50">
-              
               {/* Explorer Header */}
               <div className="flex items-center justify-between px-4 py-3 bg-zinc-950/40 border-b border-white/5">
                 <span className="text-[10px] font-mono font-bold tracking-widest text-zinc-500 uppercase flex items-center gap-1.5">
                   <Folder className="h-3.5 w-3.5 text-zinc-400" />
                   <span>Explorer</span>
                 </span>
-                <span className="text-[10px] font-mono text-zinc-600">VARUN-OS</span>
+                <span className="text-[10px] font-mono text-zinc-600">
+                  VARUN-OS
+                </span>
               </div>
 
               {/* Workspace Directory Tree */}
@@ -552,8 +585,10 @@ export default function Resume() {
                     const isActive = activeFile === fName;
                     const file = FILES[fName];
                     let iconColor = "text-zinc-500";
-                    if (file.language === "markdown") iconColor = "text-rose-500";
-                    if (file.language === "json") iconColor = "text-emerald-500";
+                    if (file.language === "markdown")
+                      iconColor = "text-rose-500";
+                    if (file.language === "json")
+                      iconColor = "text-emerald-500";
                     if (file.language === "yaml") iconColor = "text-amber-500";
 
                     return (
@@ -587,21 +622,22 @@ export default function Resume() {
                 Right Panel (Editor Area + Preview Switcher)
                 ---------------------------------------------------- */}
             <div className="lg:col-span-8 flex flex-col bg-zinc-950/20">
-              
               {/* Editor Path Breadcrumbs & Mode Switcher */}
               <div className="flex items-center justify-between border-b border-white/10 bg-zinc-950/60 select-none px-4 py-2">
-                
                 {/* Active path breadcrumbs */}
                 <div className="flex items-center gap-1.5 font-mono text-2xs text-zinc-500">
                   <Folder className="h-3.5 w-3.5 text-zinc-600 fill-zinc-600/10 hidden sm:inline-block" />
                   <span className="hidden sm:inline-block">resume_data</span>
-                  <span className="text-zinc-700 hidden sm:inline-block">/</span>
-                  <span className="text-zinc-300 font-medium">{activeFile}</span>
+                  <span className="text-zinc-700 hidden sm:inline-block">
+                    /
+                  </span>
+                  <span className="text-zinc-300 font-medium">
+                    {activeFile}
+                  </span>
                 </div>
 
                 {/* View Mode Toggle Controls (Code / Preview) */}
                 <div className="flex items-center p-0.5 bg-zinc-900/80 rounded-md border border-white/5 text-2xs font-mono select-none">
-                  
                   {/* Code View button */}
                   <button
                     onClick={() => setViewMode("code")}
@@ -627,14 +663,11 @@ export default function Resume() {
                     <Eye className="h-3 w-3" />
                     <span className="hidden sm:inline-block">Preview</span>
                   </button>
-
                 </div>
-
               </div>
 
               {/* Editor Workspace Content Container */}
               <div className="flex-1 p-5 md:p-6 overflow-y-auto max-h-[580px] custom-scrollbar select-text">
-                
                 {viewMode === "code" ? (
                   // ----------------------------------------------------
                   // IDE CODE VIEW (Syntax Highlighted)
@@ -651,7 +684,10 @@ export default function Resume() {
                     <pre className="flex-1 text-zinc-300 overflow-x-auto whitespace-pre pb-4 scrollbar-none font-medium">
                       <code
                         dangerouslySetInnerHTML={{
-                          __html: highlightCode(FILES[activeFile].content, FILES[activeFile].language),
+                          __html: highlightCode(
+                            FILES[activeFile].content,
+                            FILES[activeFile].language,
+                          ),
                         }}
                       />
                     </pre>
@@ -669,7 +705,14 @@ export default function Resume() {
                             Overview Summary
                           </h3>
                           <p className="text-zinc-400 font-mono text-sm leading-relaxed">
-                            I am a software developer passionate about building scalable applications and solving complex challenges. Rather than simply writing code, I focus on creating efficient systems, clean architectures, and seamless user experiences that remain reliable, maintainable, and impactful as products evolve. My work spans full-stack development, backend engineering, and AI-powered solutions.
+                            I am a software developer passionate about building
+                            scalable applications and solving complex
+                            challenges. Rather than simply writing code, I focus
+                            on creating efficient systems, clean architectures,
+                            and seamless user experiences that remain reliable,
+                            maintainable, and impactful as products evolve. My
+                            work spans full-stack development, backend
+                            engineering, and AI-powered solutions.
                           </p>
                         </div>
 
@@ -679,20 +722,28 @@ export default function Resume() {
                             {"// System Stats Dashboard"}
                           </h4>
                           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            
                             {/* Academic Performance CGPA card */}
                             <div className="p-4 rounded-xl border border-white/5 bg-zinc-950/40 flex flex-col justify-between hover:border-brand/30 transition-all duration-300">
                               <div className="flex justify-between items-start mb-2">
-                                <span className="text-2xs font-mono text-zinc-500">ACADEMICS_CGPA</span>
-                                <Sparkles className="h-4 w-4 text-brand" />
+                                <span className="text-2xs font-mono text-zinc-500">
+                                  ACADEMICS_CGPA
+                                </span>
+                                <Award className="h-4 w-4 text-brand" />
                               </div>
                               <div className="flex items-baseline gap-1 mt-1">
-                                <span className="text-2xl font-bold font-sans text-white">9.79</span>
-                                <span className="text-xs font-mono text-zinc-500">/ 10.0</span>
+                                <span className="text-2xl font-bold font-sans text-white">
+                                  9.79
+                                </span>
+                                <span className="text-xs font-mono text-zinc-500">
+                                  / 10.0
+                                </span>
                               </div>
                               <div className="mt-3">
                                 <div className="w-full bg-zinc-900 rounded-full h-1.5 overflow-hidden">
-                                  <div className="bg-brand h-full rounded-full shadow-[0_0_8px_#22c55e]" style={{ width: "97.9%" }} />
+                                  <div
+                                    className="bg-brand h-full rounded-full shadow-[0_0_8px_#22c55e]"
+                                    style={{ width: "97.9%" }}
+                                  />
                                 </div>
                                 <span className="text-3xs font-mono text-zinc-600 block mt-1">
                                   SRM Institute of Science and Technology
@@ -703,32 +754,49 @@ export default function Resume() {
                             {/* Secondary education stats card */}
                             <div className="p-4 rounded-xl border border-white/5 bg-zinc-950/40 flex flex-col justify-between hover:border-accent/30 transition-all duration-300">
                               <div className="flex justify-between items-start mb-2">
-                                <span className="text-2xs font-mono text-zinc-500">HIGH_SCHOOL_GRADE</span>
+                                <span className="text-2xs font-mono text-zinc-500">
+                                  HIGH_SCHOOL_GRADE
+                                </span>
                                 <GraduationCap className="h-4 w-4 text-accent" />
                               </div>
                               <div className="flex items-baseline gap-1 mt-1">
-                                <span className="text-2xl font-bold font-sans text-white">85.2%</span>
-                                <span className="text-xs font-mono text-zinc-500">aggreg.</span>
+                                <span className="text-2xl font-bold font-sans text-white">
+                                  85.2%
+                                </span>
+                                <span className="text-xs font-mono text-zinc-500">
+                                  aggreg.
+                                </span>
                               </div>
                               <div className="mt-3">
                                 <div className="w-full bg-zinc-900 rounded-full h-1.5 overflow-hidden">
-                                  <div className="bg-accent h-full rounded-full shadow-[0_0_8px_#ef4444]" style={{ width: "85.2%" }} />
+                                  <div
+                                    className="bg-accent h-full rounded-full shadow-[0_0_8px_#ef4444]"
+                                    style={{ width: "85.2%" }}
+                                  />
                                 </div>
                                 <span className="text-3xs font-mono text-zinc-600 block mt-1">
-                                  Valley View School (XII Science & Computer Science)
+                                  Valley View School (XII Science & Computer
+                                  Science)
                                 </span>
                               </div>
                             </div>
-
                           </div>
                         </div>
 
                         {/* Engineering Core Values */}
                         <div className="p-4 rounded-xl border border-white/5 bg-zinc-950/60 font-mono text-xs text-zinc-400 space-y-2">
-                          <div className="text-white font-bold text-sm">{"// Operational Directives"}</div>
-                          <div>• Focus on low-latency network applications and caching.</div>
-                          <div>• Rigid unit testing and automatic CI/CD system deployment.</div>
-                          <div>• Strict clean architectural abstractions to avoid technical debt.</div>
+                          <div className="text-white font-bold text-sm">
+                            {"// Development Directives"}
+                          </div>
+                          <div>
+                            • Build high-performance applications optimized for low latency and smooth user experience.
+                          </div>
+                          <div>
+                            • Engineer scalable product architectures with clean, modular, and maintainable codebases.
+                          </div>
+                          <div>
+                            • Design extensible systems to support rapid feature iteration and seamless product growth.
+                          </div>
                         </div>
                       </div>
                     )}
@@ -749,27 +817,58 @@ export default function Resume() {
                           {/* Item 1 */}
                           <div className="relative">
                             <span className="absolute -left-[31px] top-1.5 h-3.5 w-3.5 rounded-full bg-[#000000] border-2 border-brand shadow-[0_0_8px_rgba(34,197,94,0.4)] flex items-center justify-center" />
-                            
+
                             <div className="space-y-1">
                               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
-                                <h4 className="text-base font-bold text-white">Backend Developer Intern</h4>
-                                <span className="text-2xs font-mono text-zinc-500">June 2025 - Sept 2025</span>
+                                <h4 className="text-base font-bold text-white">
+                                  Backend Developer Intern
+                                </h4>
+                                <span className="text-2xs font-mono text-zinc-500">
+                                  June 2025 - Sept 2025
+                                </span>
                               </div>
                               <div className="text-xs font-mono text-brand font-semibold flex items-center gap-2">
                                 <span>SAARC MASTS TECH PVT LTD</span>
                                 <span className="text-zinc-600">|</span>
-                                <span className="text-zinc-500 text-3xs font-light">Remote</span>
+                                <span className="text-zinc-500 text-3xs font-light">
+                                  Remote
+                                </span>
                               </div>
-                              
+
                               <ul className="mt-3 space-y-1.5 text-xs text-zinc-400 list-disc pl-4 font-mono leading-relaxed">
-                                <li>Built and optimized backend systems for mentor-student networking and progress tracking using Node.js and PostgreSQL, ensuring scalable performance and efficient data management.</li>
-                                <li>Engineered telemetry microservices and refactored bottleneck endpoints, cutting response latency by 35% and improving data throughput.</li>
-                                <li>Conducted code reviews and maintained high-quality, production-ready code following backend development best practices.</li>
+                                <li>
+                                  Built and optimized backend systems for
+                                  mentor-student networking and progress
+                                  tracking using Node.js and PostgreSQL,
+                                  ensuring scalable performance and efficient
+                                  data management.
+                                </li>
+                                <li>
+                                  Engineered telemetry microservices and
+                                  refactored bottleneck endpoints, cutting
+                                  response latency by 35% and improving data
+                                  throughput.
+                                </li>
+                                <li>
+                                  Conducted code reviews and maintained
+                                  high-quality, production-ready code following
+                                  backend development best practices.
+                                </li>
                               </ul>
 
                               <div className="flex flex-wrap gap-1.5 pt-3">
-                                {["Node.js", "PostgreSQL", "Express", "Microservices", "Telemetry", "Git"].map((t) => (
-                                  <span key={t} className="text-3xs font-mono px-2 py-0.5 rounded bg-zinc-900 border border-white/5 text-zinc-300">
+                                {[
+                                  "Node.js",
+                                  "PostgreSQL",
+                                  "Express",
+                                  "Microservices",
+                                  "Telemetry",
+                                  "Git",
+                                ].map((t) => (
+                                  <span
+                                    key={t}
+                                    className="text-3xs font-mono px-2 py-0.5 rounded bg-zinc-900 border border-white/5 text-zinc-300"
+                                  >
                                     {t}
                                   </span>
                                 ))}
@@ -780,33 +879,62 @@ export default function Resume() {
                           {/* Item 2 */}
                           <div className="relative">
                             <span className="absolute -left-[31px] top-1.5 h-3.5 w-3.5 rounded-full bg-[#000000] border-2 border-zinc-700 flex items-center justify-center" />
-                            
+
                             <div className="space-y-1">
                               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
-                                <h4 className="text-base font-bold text-white">Full Stack Developer Intern</h4>
-                                <span className="text-2xs font-mono text-zinc-500">Dec 2024 - Mar 2025</span>
+                                <h4 className="text-base font-bold text-white">
+                                  Full Stack Developer Intern
+                                </h4>
+                                <span className="text-2xs font-mono text-zinc-500">
+                                  Dec 2024 - Mar 2025
+                                </span>
                               </div>
                               <div className="text-xs font-mono text-brand font-semibold flex items-center gap-2">
-                                <span>International Federation of Inventors&apos; Association - Bharat Chapter</span>
+                                <span>
+                                  International Federation of Inventors&apos;
+                                  Association - Bharat Chapter
+                                </span>
                                 <span className="text-zinc-600">|</span>
-                                <span className="text-zinc-500 text-3xs font-light">Remote</span>
+                                <span className="text-zinc-500 text-3xs font-light">
+                                  Remote
+                                </span>
                               </div>
-                              
+
                               <ul className="mt-3 space-y-1.5 text-xs text-zinc-400 list-disc pl-4 font-mono leading-relaxed">
-                                <li>Led end-to-end development and deployment of the IFIA Bharat web application, cutting page load time by 50% and improving responsiveness through SSR and automated CI/CD releases.</li>
-                                <li>Engineered scalable CI/CD pipelines and optimized custom DNS configurations to enable fast, reliable releases.</li>
+                                <li>
+                                  Led end-to-end development and deployment of
+                                  the IFIA Bharat web application, cutting page
+                                  load time by 50% and improving responsiveness
+                                  through SSR and automated CI/CD releases.
+                                </li>
+                                <li>
+                                  Engineered scalable CI/CD pipelines and
+                                  optimized custom DNS configurations to enable
+                                  fast, reliable releases.
+                                </li>
                               </ul>
 
                               <div className="flex flex-wrap gap-1.5 pt-3">
-                                {["Next.js", "Tailwind CSS", "TypeScript", "Node.js", "Express", "PostgreSQL", "Vercel", "Docker"].map((t) => (
-                                  <span key={t} className="text-3xs font-mono px-2 py-0.5 rounded bg-zinc-900 border border-white/5 text-zinc-300">
+                                {[
+                                  "Next.js",
+                                  "Tailwind CSS",
+                                  "TypeScript",
+                                  "Node.js",
+                                  "Express",
+                                  "PostgreSQL",
+                                  "Vercel",
+                                  "Docker",
+                                ].map((t) => (
+                                  <span
+                                    key={t}
+                                    className="text-3xs font-mono px-2 py-0.5 rounded bg-zinc-900 border border-white/5 text-zinc-300"
+                                  >
                                     {t}
                                   </span>
                                 ))}
                               </div>
                             </div>
                           </div>
-
                         </div>
                       </div>
                     )}
@@ -818,7 +946,6 @@ export default function Resume() {
                         </h3>
 
                         <div className="space-y-6">
-                          
                           {/* SRM */}
                           <div className="p-5 rounded-xl border border-white/5 bg-zinc-950/40 hover:border-brand/30 transition-all duration-300 flex items-start gap-4">
                             <div className="p-3 rounded-lg bg-zinc-900 border border-white/5 text-brand shrink-0">
@@ -826,15 +953,25 @@ export default function Resume() {
                             </div>
                             <div className="space-y-1 flex-1">
                               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
-                                <h4 className="text-base font-bold text-white">SRM Institute of Science and Technology</h4>
-                                <span className="text-xs font-mono text-zinc-500">June 2023 - May 2027</span>
+                                <h4 className="text-base font-bold text-white">
+                                  SRM Institute of Science and Technology
+                                </h4>
+                                <span className="text-xs font-mono text-zinc-500">
+                                  June 2023 - May 2027
+                                </span>
                               </div>
                               <div className="text-xs font-mono text-zinc-400">
-                                B.Tech in Computer Science and Engineering (Specialization: Big Data Analytics) <span className="text-zinc-500 font-light">| Chennai</span>
+                                B.Tech in Computer Science and Engineering
+                                (Specialization: Big Data Analytics){" "}
+                                <span className="text-zinc-500 font-light">
+                                  | Chennai
+                                </span>
                               </div>
                               <div className="pt-2 flex items-center gap-1.5 text-xs font-mono">
                                 <span className="text-zinc-500">Grade:</span>
-                                <span className="text-brand font-bold">9.79 CGPA</span>
+                                <span className="text-brand font-bold">
+                                  9.79 CGPA
+                                </span>
                               </div>
                             </div>
                           </div>
@@ -846,15 +983,25 @@ export default function Resume() {
                             </div>
                             <div className="space-y-1 flex-1">
                               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
-                                <h4 className="text-base font-bold text-white">Valley View School</h4>
-                                <span className="text-xs font-mono text-zinc-500">May 2023</span>
+                                <h4 className="text-base font-bold text-white">
+                                  Valley View School
+                                </h4>
+                                <span className="text-xs font-mono text-zinc-500">
+                                  May 2023
+                                </span>
                               </div>
                               <div className="text-xs font-mono text-zinc-400">
-                                AISSCE Senior Secondary (Class XII), Pure Science with Computer Science & English <span className="text-zinc-500 font-light">| Jamshedpur</span>
+                                AISSCE Senior Secondary (Class XII), Pure
+                                Science with Computer Science & English{" "}
+                                <span className="text-zinc-500 font-light">
+                                  | Jamshedpur
+                                </span>
                               </div>
                               <div className="pt-2 flex items-center gap-1.5 text-xs font-mono">
                                 <span className="text-zinc-500">Score:</span>
-                                <span className="text-white font-bold">85.2%</span>
+                                <span className="text-white font-bold">
+                                  85.2%
+                                </span>
                               </div>
                             </div>
                           </div>
@@ -866,19 +1013,28 @@ export default function Resume() {
                             </div>
                             <div className="space-y-1 flex-1">
                               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
-                                <h4 className="text-base font-bold text-white">Valley View School</h4>
-                                <span className="text-xs font-mono text-zinc-500">Aug 2021</span>
+                                <h4 className="text-base font-bold text-white">
+                                  Valley View School
+                                </h4>
+                                <span className="text-xs font-mono text-zinc-500">
+                                  Aug 2021
+                                </span>
                               </div>
                               <div className="text-xs font-mono text-zinc-400">
-                                AISSE Secondary (Class X), Computer Science & English <span className="text-zinc-500 font-light">| Jamshedpur</span>
+                                AISSE Secondary (Class X), Computer Science &
+                                English{" "}
+                                <span className="text-zinc-500 font-light">
+                                  | Jamshedpur
+                                </span>
                               </div>
                               <div className="pt-2 flex items-center gap-1.5 text-xs font-mono">
                                 <span className="text-zinc-500">Score:</span>
-                                <span className="text-white font-bold">87.8%</span>
+                                <span className="text-white font-bold">
+                                  87.8%
+                                </span>
                               </div>
                             </div>
                           </div>
-
                         </div>
                       </div>
                     )}
@@ -890,12 +1046,13 @@ export default function Resume() {
                         </h3>
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                          
                           {/* Core Languages */}
                           <div className="p-5 rounded-xl border border-white/5 bg-zinc-950/40 space-y-3">
                             <div className="flex items-center gap-2 text-brand">
                               <Cpu className="h-4 w-4" />
-                              <h4 className="text-sm font-mono font-bold uppercase tracking-wider">Core & Languages</h4>
+                              <h4 className="text-sm font-mono font-bold uppercase tracking-wider">
+                                Core & Languages
+                              </h4>
                             </div>
                             <div className="grid grid-cols-2 gap-x-2 gap-y-1.5 font-mono text-xs text-zinc-400">
                               {[
@@ -906,7 +1063,10 @@ export default function Resume() {
                                 "Rust",
                                 "Data Structures",
                               ].map((item) => (
-                                <div key={item} className="flex items-center gap-2">
+                                <div
+                                  key={item}
+                                  className="flex items-center gap-2"
+                                >
                                   <span className="h-1.5 w-1.5 rounded-full bg-brand" />
                                   <span>{item}</span>
                                 </div>
@@ -918,7 +1078,9 @@ export default function Resume() {
                           <div className="p-5 rounded-xl border border-white/5 bg-zinc-950/40 space-y-3">
                             <div className="flex items-center gap-2 text-accent">
                               <Layers className="h-4 w-4" />
-                              <h4 className="text-sm font-mono font-bold uppercase tracking-wider">Web & Frameworks</h4>
+                              <h4 className="text-sm font-mono font-bold uppercase tracking-wider">
+                                Web & Frameworks
+                              </h4>
                             </div>
                             <div className="grid grid-cols-2 gap-x-2 gap-y-1.5 font-mono text-xs text-zinc-400">
                               {[
@@ -928,7 +1090,10 @@ export default function Resume() {
                                 "Express.js",
                                 "FastAPI",
                               ].map((item) => (
-                                <div key={item} className="flex items-center gap-2">
+                                <div
+                                  key={item}
+                                  className="flex items-center gap-2"
+                                >
                                   <span className="h-1.5 w-1.5 rounded-full bg-accent" />
                                   <span>{item}</span>
                                 </div>
@@ -940,7 +1105,9 @@ export default function Resume() {
                           <div className="p-5 rounded-xl border border-white/5 bg-zinc-950/40 space-y-3">
                             <div className="flex items-center gap-2 text-amber-500">
                               <Wrench className="h-4 w-4" />
-                              <h4 className="text-sm font-mono font-bold uppercase tracking-wider">Databases & Systems</h4>
+                              <h4 className="text-sm font-mono font-bold uppercase tracking-wider">
+                                Databases & Systems
+                              </h4>
                             </div>
                             <div className="grid grid-cols-2 gap-x-2 gap-y-1.5 font-mono text-xs text-zinc-400">
                               {[
@@ -949,7 +1116,10 @@ export default function Resume() {
                                 "Redis",
                                 "Distributed Systems",
                               ].map((item) => (
-                                <div key={item} className="flex items-center gap-2">
+                                <div
+                                  key={item}
+                                  className="flex items-center gap-2"
+                                >
                                   <span className="h-1.5 w-1.5 rounded-full bg-amber-500" />
                                   <span>{item}</span>
                                 </div>
@@ -961,7 +1131,9 @@ export default function Resume() {
                           <div className="p-5 rounded-xl border border-white/5 bg-zinc-950/40 space-y-3">
                             <div className="flex items-center gap-2 text-cyan-400">
                               <Terminal className="h-4 w-4" />
-                              <h4 className="text-sm font-mono font-bold uppercase tracking-wider">Developer Tools</h4>
+                              <h4 className="text-sm font-mono font-bold uppercase tracking-wider">
+                                Developer Tools
+                              </h4>
                             </div>
                             <div className="grid grid-cols-2 gap-x-2 gap-y-1.5 font-mono text-xs text-zinc-400">
                               {[
@@ -972,31 +1144,28 @@ export default function Resume() {
                                 "Prometheus & Grafana",
                                 "npm",
                               ].map((item) => (
-                                <div key={item} className="flex items-center gap-2">
+                                <div
+                                  key={item}
+                                  className="flex items-center gap-2"
+                                >
                                   <span className="h-1.5 w-1.5 rounded-full bg-cyan-400" />
                                   <span>{item}</span>
                                 </div>
                               ))}
                             </div>
                           </div>
-
                         </div>
                       </div>
                     )}
                   </div>
                 )}
-
               </div>
 
               {/* Mobile-only Integrated Terminal console */}
               {renderTerminal(mobileTerminalRef, true)}
-
             </div>
-
           </div>
-
         </div>
-
       </div>
     </section>
   );
