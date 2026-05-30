@@ -1,127 +1,154 @@
 "use client";
-import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
-import Section from "./section";
-import Image from "next/image";
-import { Binary, Brain, Workflow } from "lucide-react";
-import useIsMobile from "@/hooks/use-is-mobile";
+
+import { useEffect, useRef } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { Cpu, Shield, Network } from "lucide-react";
+
+gsap.registerPlugin(ScrollTrigger);
+
+const FEATURES = [
+  {
+    num: "01",
+    title: "Backend Systems",
+    icon: Network,
+    description:
+      "Focus on optimizing low-latency networking protocols, stateful application logic, and performance tracking systems.",
+  },
+  {
+    num: "02",
+    title: "Data Structures & Distributed Systems",
+    icon: Cpu,
+    description:
+      "Implement high-performance core algorithms, partition-tolerant databases, and consensus-driven scalable architectures.",
+  },
+  {
+    num: "03",
+    title: "Scalable Infrastructure",
+    icon: Shield,
+    description:
+      "Build robust CI/CD pipelines, custom DNS configurations, and automated deployment architectures for reliable, fast releases.",
+  },
+];
 
 export default function About() {
-  const isMobile = useIsMobile();
-
-  return (
-    <Section id="about" title="About Me" data-mobile-optimized>
-      <motion.div
-        className="glass rounded-2xl p-6 border border-border/60"
-        initial={isMobile ? { opacity: 1, x: 0 } : { opacity: 0, x: -12 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        viewport={{ once: true, amount: isMobile ? 0.05 : 0.6 }}
-        transition={{ duration: isMobile ? 0.05 : 0.6 }}
-        data-mobile-optimized
-      >
-        <p className="text-pretty leading-relaxed text-muted-foreground">
-          👋 Hi, I’m Varun Sinha, a Full Stack Developer and third-year Computer
-          Science and Engineering student (Batch of 2027). I love building
-          responsive, high-performance web applications that blend great design
-          with solid engineering.
-        </p>
-        <p className="mt-4 text-pretty leading-relaxed text-muted-foreground">
-          I specialize in crafting scalable full-stack architectures, optimizing
-          user experiences, and delivering feature-rich, impactful solutions.
-          With a strong foundation in Data Structures and Algorithms, I enjoy
-          solving complex challenges and continuously learning new technologies
-          to create meaningful digital experiences.
-        </p>
-      </motion.div>
-
-      <motion.div
-        initial={isMobile ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: isMobile ? 0.05 : 0.4 }}
-        transition={{ duration: isMobile ? 0.05 : 0.6 }}
-        className="glass rounded-2xl p-6 border border-border/60 mt-6"
-        data-mobile-optimized
-      >
-        <h3 className="text-lg font-semibold tracking-tight mb-4">Skills</h3>
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 sm:gap-6">
-          <SkillTile name="C++" img="/icons/cpp.jpg" />
-          <SkillTile name="Python" img="/icons/python.png" />
-          <SkillTile name="Rust" img="/icons/rust.png" />
-          <SkillTile name="TypeScript" img="/icons/typescript.png" />
-          <SkillTile name="JavaScript" img="/icons/javascript.png" />
-          <SkillTile name="React.js" img="/icons/react.jpg" />
-          <SkillTile name="Next.js" img="/icons/nextjs.png" />
-          <SkillTile name="Node.js" img="/icons/node.png" />
-          <SkillTile name="Express.js" img="/icons/express.png" />
-          <SkillTile name="FastAPI" img="/icons/fastapi.png" />
-          <SkillTile name="PostgreSQL" img="/icons/postgres.png" />
-          <SkillTile name="MongoDB" img="/icons/mongodb.png" />
-          <SkillTile name="Redis" img="/icons/redis.png" />
-          <SkillTile name="Git" img="/icons/git.png" />
-          <SkillTile name="Docker" img="/icons/docker.png" />
-          <SkillTile name="Data Structures" img="/icons/dsa.jpg" />
-          <SkillTile name="Distributed Systems" img="/icons/distributed-systems.jpg" />
-        </div>
-      </motion.div>
-    </Section>
-  );
-}
-
-function SkillTile({
-  name,
-  img,
-  iconClass,
-}: {
-  name: string;
-  img?: string;
-  iconClass?: "Binary" | "Brain" | "Workflow";
-}) {
-  const [isMobile, setIsMobile] = useState(false);
+  const containerRef = useRef<HTMLDivElement | null>(null);
+  const leftRef = useRef<HTMLDivElement | null>(null);
+  const rightRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(
-        window.innerWidth < 768 ||
-          /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-            navigator.userAgent,
-          ),
-      );
-    };
+    const ctx = gsap.context(() => {
+      // Animate left philosophy statement
+      if (leftRef.current) {
+        gsap.fromTo(
+          leftRef.current.children,
+          { opacity: 0, y: 30 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            stagger: 0.2,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: leftRef.current,
+              start: "top 80%",
+              toggleActions: "play none none none",
+            },
+          },
+        );
+      }
 
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
+      // Animate right cards list
+      if (rightRef.current) {
+        const cards = rightRef.current.querySelectorAll(".feature-card");
+        gsap.fromTo(
+          cards,
+          { opacity: 0, x: 40 },
+          {
+            opacity: 1,
+            x: 0,
+            duration: 0.8,
+            stagger: 0.2,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: rightRef.current,
+              start: "top 80%",
+              toggleActions: "play none none none",
+            },
+          },
+        );
+      }
+    }, containerRef);
+
+    return () => ctx.revert();
   }, []);
 
   return (
-    <motion.div
-      className="group flex flex-col items-center gap-1.5 sm:gap-2"
-      initial={isMobile ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: isMobile ? 0.01 : 0.2 }}
-      transition={{ duration: isMobile ? 0.05 : 0.35 }}
-      whileHover={isMobile ? {} : { scale: 1.04, y: -2 }}
+    <section
+      id="about"
+      ref={containerRef}
+      className="pt-24 md:pt-40 pb-24 border-t border-white/5 bg-[#000000] relative"
     >
-      <div className="rounded-full h-12 w-12 sm:h-16 sm:w-16 grid place-items-center bg-background/40 backdrop-blur-md shadow-[inset_0_0_0_1px_rgba(255,255,255,0.06)] ring-0 group-hover:ring-2 group-hover:ring-neon transition will-change-transform group-hover:-translate-y-0.5">
-        {img ? (
-          <Image
-            src={img}
-            alt={name}
-            width={32}
-            height={32}
-            className="h-6 w-6 sm:h-8 sm:w-8 rounded-full"
-          />
-        ) : iconClass === "Binary" ? (
-          <Binary className="h-5 w-5 sm:h-6 sm:w-6" />
-        ) : iconClass === "Brain" ? (
-          <Brain className="h-5 w-5 sm:h-6 sm:w-6" />
-        ) : (
-          <Workflow className="h-5 w-5 sm:h-6 sm:w-6" />
-        )}
+      <div className="mx-auto w-full max-w-6xl px-4 md:px-6">
+        {/* 2-Column Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-16 items-start">
+          {/* Left Column: Philosophy */}
+          <div ref={leftRef} className="col-span-1 md:col-span-5 space-y-6">
+            {/* Section Header */}
+            <div className="space-y-2">
+              <span className="text-xs font-mono uppercase tracking-widest text-accent">
+                [ IDENTITY & OUTLINE ]
+              </span>
+              <h2 className="text-3xl md:text-5xl font-black tracking-tight text-white uppercase font-sans leading-tight">
+                Behind the Code
+              </h2>
+            </div>
+
+            <p className="text-lg font-mono text-zinc-400 leading-relaxed">
+              I am a software developer passionate about building scalable applications and solving complex challenges. Rather than simply writing code, I focus on creating efficient systems, clean architectures, and seamless user experiences that remain reliable, maintainable, and impactful as products evolve.
+            </p>
+            <p className="text-sm font-mono text-zinc-500 leading-relaxed">
+              My work spans full-stack development, backend engineering and AI-powered solutions. I enjoy transforming ideas into reliable, high-performance software products.
+            </p>
+          </div>
+
+          {/* Right Column: Feature Cards */}
+          <div ref={rightRef} className="col-span-1 md:col-span-7 space-y-6">
+            {FEATURES.map((feat) => {
+              const Icon = feat.icon;
+              return (
+                <div
+                  key={feat.num}
+                  className="feature-card group relative p-6 rounded-xl bg-zinc-950/40 border border-white/5 hover:border-brand/40 transition-all duration-300 shadow-[0_4px_20px_rgba(0,0,0,0.4)]"
+                >
+                  {/* Glowing background on hover */}
+                  <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(34,197,94,0.05),transparent_60%)] pointer-events-none rounded-xl" />
+
+                  {/* Header Row */}
+                  <div className="flex items-start justify-between">
+                    <div className="flex items-center gap-3">
+                      <div className="p-2.5 rounded-lg bg-zinc-900 border border-white/5 text-zinc-400 group-hover:text-brand transition-colors duration-300">
+                        <Icon className="h-5 w-5" />
+                      </div>
+                      <h3 className="text-lg font-semibold text-zinc-200 group-hover:text-white transition-colors duration-300">
+                        {feat.title}
+                      </h3>
+                    </div>
+                    <span className="text-xs font-mono text-zinc-600 group-hover:text-brand transition-colors duration-300">
+                      [{feat.num}]
+                    </span>
+                  </div>
+
+                  {/* Description */}
+                  <p className="mt-4 text-sm font-mono text-zinc-400 leading-relaxed">
+                    {feat.description}
+                  </p>
+                </div>
+              );
+            })}
+          </div>
+        </div>
       </div>
-      <div className="text-[10px] sm:text-xs text-center text-muted-foreground leading-tight">
-        {name}
-      </div>
-    </motion.div>
+    </section>
   );
 }

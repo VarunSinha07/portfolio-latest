@@ -1,142 +1,133 @@
 "use client";
 
-import Section from "./section";
-import { motion } from "framer-motion";
-import { useMemo, useState } from "react";
-import TiltCard from "./tilt-card";
-import { Button } from "@/components/ui/button";
+import { useEffect, useRef } from "react";
 import Image from "next/image";
-import useIsMobile from "@/hooks/use-is-mobile";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ExternalLink } from "lucide-react";
 
-type Project = {
-  title: string;
-  desc: string;
-  href?: string;
-  tags: ("Frontend" | "Backend" | "Full Stack")[];
-  img: string;
-};
+gsap.registerPlugin(ScrollTrigger);
 
-const projects: Project[] = [
+const PROJECTS = [
   {
     title: "PrakSat",
-    desc: "A scalable multi-tenant air quality forecasting SaaS platform with role-based access, credit-based API monetization, and interactive time-series dashboards.",
+    desc: "A scalable multi-tenant air quality forecasting SaaS platform with role-based access control, credits-based API monetization, and interactive time-series dashboards.",
     href: "https://drive.google.com/file/d/1VgOs2-xuNvw_hiDEwBo4DXouJeeAfh3P/view?usp=sharing",
-    tags: ["Full Stack", "Frontend", "Backend"],
-    img: "/projects/praksat.jpg", 
+    tags: ["Next.js", "TypeScript", "FastAPI", "PostgreSQL", "Redis"],
+    img: "/projects/praksat.jpg",
   },
   {
     title: "Zit",
-    desc: "A terminal-based AI Git assistant in Rust with an interactive TUI, enabling real-time debugging, workflow automation, and intelligent developer guidance.",
+    desc: "A terminal-based AI Git assistant built with an interactive TUI, enabling real-time debugging, workflow automation, and intelligent developer assistance.",
     href: "https://main.dg6ahogo2wxtk.amplifyapp.com/",
-    tags: ["Backend"],
-    img: "/projects/zit.png", 
-  },
-  {
-  title: "VyaparFlow",
-  desc: "A full-stack business management platform that streamlines inventory tracking, billing, and financial workflows with real-time data insights, enabling small businesses to manage operations efficiently.",
-  href: "https://vyaparflow.vercel.app/",
-  tags: ["Full Stack"],
-  img: "/projects/vyaparflow.png",
-  },
-  {
-    title: "IFIA Bharat",
-    desc: "Developed the official website for IFIA Bharat. Implemented the full frontend and backend solution with scalable CI/CD pipelines enabling fast releases.",
-    href: "https://ifiabharat.com",
-    tags: ["Full Stack", "Frontend", "Backend"],
-    img: "/projects/IFIA-bharat.png",
+    tags: ["Rust", "Git", "AWS Lambda", "Amazon Bedrock"],
+    img: "/projects/zit.png",
   },
 ];
 
-const filters = ["All", "Frontend", "Backend", "Full Stack"] as const;
-type Filter = (typeof filters)[number];
-
 export default function Projects() {
-  const [active, setActive] = useState<Filter>("All");
-  const isMobile = useIsMobile();
+  const containerRef = useRef<HTMLDivElement | null>(null);
 
-  const list = useMemo(
-    () =>
-      projects.filter(
-        (p) =>
-          active === "All" ||
-          p.tags.includes(active as "Frontend" | "Backend" | "Full Stack"),
-      ),
-    [active],
-  );
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      const cards = containerRef.current?.querySelectorAll(".project-card");
+      if (cards) {
+        gsap.fromTo(
+          cards,
+          { opacity: 0, y: 55 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            stagger: 0.2,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: containerRef.current,
+              start: "top 80%",
+              toggleActions: "play none none none",
+            },
+          }
+        );
+      }
+    }, containerRef);
+
+    return () => ctx.revert();
+  }, []);
 
   return (
-    <Section
+    <section
       id="projects"
-      title="Projects"
-      className="scroll-mt-24"
-      data-mobile-optimized
+      ref={containerRef}
+      className="py-24 border-t border-white/5 bg-[#000000] scroll-mt-20"
     >
-      <div className="mb-6 flex flex-wrap gap-2">
-        {filters.map((f) => (
-          <Button
-            key={f}
-            size="sm"
-            variant={active === f ? "default" : "outline"}
-            onClick={() => setActive(f)}
-            className={
-              active === f
-                ? "neon text-color-white hover:text-black glass border border-border/60"
-                : "glass border border-border/60"
-            }
-          >
-            {f}
-          </Button>
-        ))}
-      </div>
+      <div className="mx-auto w-full max-w-6xl px-4 md:px-6">
+        
+        {/* Section Header */}
+        <div className="mb-16 space-y-2">
+          <span className="text-xs font-mono uppercase tracking-widest text-accent">
+            [ SELECTED PROJECTS ]
+          </span>
+          <h2 className="text-3xl md:text-5xl font-black tracking-tight text-white uppercase font-sans">
+            Portfolio Works
+          </h2>
+        </div>
 
-      <div className="grid gap-6 md:grid-cols-2" data-mobile-optimized>
-        {list.map((p, idx) => (
-          <TiltCard key={p.title} className="rounded-2xl card-gradient-border">
-            <motion.a
-              href={p.href}
-              target={p.href ? "_blank" : undefined}
-              rel={p.href ? "noopener noreferrer" : undefined}
-              className="group block overflow-hidden rounded-2xl glass border border-border/60"
-              initial={isMobile ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: isMobile ? 0.05 : 0.4 }}
-              transition={{
-                duration: isMobile ? 0.05 : 0.5,
-                delay: isMobile ? 0 : idx * 0.06,
-              }}
+        {/* Projects Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {PROJECTS.map((proj) => (
+            <a
+              key={proj.title}
+              href={proj.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="project-card group flex flex-col rounded-xl bg-zinc-950/40 border border-white/5 hover:border-brand/40 transition-all duration-300 relative overflow-hidden shadow-2xl"
             >
-              <div className="relative">
+              {/* Image Preview Container */}
+              <div className="relative aspect-video w-full overflow-hidden bg-zinc-900 border-b border-white/5">
                 <Image
-                  src={p.img.startsWith("/") ? p.img : `/${p.img}.jpg`}
-                  alt={`${p.title} preview`}
-                  width={640}
-                  height={360}
-                  className="aspect-video w-full object-contain"
+                  src={proj.img}
+                  alt={`${proj.title} Preview`}
+                  fill
+                  className="object-cover group-hover:scale-[1.02] transition-transform duration-500"
                 />
-                <div
-                  className={`pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 ${
-                    isMobile ? "" : "group-hover:opacity-20"
-                  } gradient-brand`}
-                />
+                {/* Monochromatic Overlay */}
+                <div className="absolute inset-0 bg-black/40 mix-blend-color group-hover:bg-transparent transition-colors duration-500" />
+                
+                {/* Tech Badge Float */}
+                <div className="absolute top-3 right-3 p-2 rounded-lg bg-black/80 border border-white/10 text-zinc-400 group-hover:text-brand transition-colors duration-300">
+                  <ExternalLink className="h-4 w-4" />
+                </div>
               </div>
-              <div className="p-5">
-                <div className="flex flex-wrap items-center gap-2">
-                  {p.tags.map((t) => (
+
+              {/* Text Information */}
+              <div className="p-6 flex flex-col flex-grow">
+                {/* Title */}
+                <h3 className="text-xl font-bold text-white font-sans flex items-center justify-between">
+                  {proj.title}
+                </h3>
+
+                {/* Description */}
+                <p className="mt-3 text-sm font-mono text-zinc-400 leading-relaxed flex-grow">
+                  {proj.desc}
+                </p>
+
+                {/* Monospace tags */}
+                <div className="mt-6 flex flex-wrap gap-2">
+                  {proj.tags.map((tag) => (
                     <span
-                      key={t}
-                      className="text-2xs glass px-2 py-1 rounded-md border border-border/60"
+                      key={tag}
+                      className="text-[10px] font-mono px-2.5 py-1 rounded bg-zinc-900 border border-white/5 text-zinc-500 group-hover:text-zinc-300 transition-colors duration-300"
                     >
-                      {t}
+                      {tag}
                     </span>
                   ))}
                 </div>
-                <h3 className="mt-3 text-xl font-semibold">{p.title}</h3>
-                <p className="mt-1 text-sm text-muted-foreground">{p.desc}</p>
               </div>
-            </motion.a>
-          </TiltCard>
-        ))}
+            </a>
+          ))}
+        </div>
+
       </div>
-    </Section>
+    </section>
   );
 }

@@ -1,22 +1,27 @@
 "use client";
+
 import Hero from "@/components/hero";
 import About from "@/components/about";
-import Experience from "@/components/experience";
+import TechStack from "@/components/tech-stack";
 import Projects from "@/components/projects";
-import Achievements from "@/components/achievements";
-import Education from "@/components/education";
+import Journey from "@/components/journey";
+import Resume from "@/components/resume";
+import Contact from "@/components/contact";
 import Footer from "@/components/footer";
 import Navbar from "@/components/navbar";
 import SocialDock from "@/components/social-dock";
+import CustomCursor from "@/components/custom-cursor";
 
 export default function HomePage() {
-
   return (
-    <main className="relative min-h-screen bg-background text-foreground"
-    >
+    <main className="relative min-h-screen bg-[#000000] text-foreground font-sans">
+      {/* Custom Retro-Futuristic HUD Cursor */}
+      <CustomCursor />
 
-
+      {/* Floating Bottom Nav Dock */}
       <Navbar />
+
+      {/* Floating Social Dock (Unchanged) */}
       <SocialDock
         linkedin="https://www.linkedin.com/in/varunsinha20/"
         github="https://github.com/VarunSinha07"
@@ -24,16 +29,14 @@ export default function HomePage() {
         email="mailto:varunsinha2604@gmail.com"
       />
 
+      {/* Main Sections */}
       <Hero />
-
-      <div className="mx-auto w-full max-w-6xl px-4 md:px-6 space-y-24 md:space-y-36">
-        <About />
-        <Experience />
-        <Projects />
-        <Education />
-        <Achievements />
-      </div>
-
+      <About />
+      <TechStack />
+      <Projects />
+      <Journey />
+      <Resume />
+      <Contact />
       <Footer />
     </main>
   );
