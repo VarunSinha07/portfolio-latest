@@ -63,7 +63,7 @@ export default function Projects() {
       <div className="mx-auto w-full max-w-6xl px-4 md:px-6">
         
         {/* Section Header */}
-        <div className="mb-16 space-y-2">
+        <div className="mb-16 space-y-2 text-center">
           <span className="text-xs font-mono uppercase tracking-widest text-accent">
             [ SELECTED PROJECTS ]
           </span>
