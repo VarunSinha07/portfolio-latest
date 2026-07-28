@@ -40,7 +40,7 @@ const FILES: Record<
     name: "summary.md",
     language: "markdown",
     content: `# Varun Sinha
-## Full Stack & Backend Engineer
+## Software Developer & Backend Engineer
 
 I am a software developer passionate about building scalable applications and solving complex challenges. Rather than simply writing code, I focus on creating efficient systems, clean architectures, and seamless user experiences that remain reliable, maintainable, and impactful as products evolve. My work spans full-stack development, backend engineering, and AI-powered solutions.
 
@@ -53,7 +53,7 @@ I am a software developer passionate about building scalable applications and so
 ### Academic Summary
 - **University:** SRM Institute of Science and Technology, Chennai
 - **Degree:** B.Tech in Computer Science and Engineering (Big Data Analytics)
-- **CGPA:** 9.79 / 10.0
+- **CGPA:** 9.76 / 10.0
 - **High School:** Valley View School, Jamshedpur (85.2%)
 - **Secondary School:** Valley View School, Jamshedpur (87.8%)
 `,
@@ -100,7 +100,7 @@ I am a software developer passionate about building scalable applications and so
       "degree": "B.Tech in Computer Science & Engineering",
       "specialization": "Big Data Analytics",
       "timeline": "June 2023 - May 2027",
-      "grade": "9.79 CGPA"
+      "grade": "9.76 CGPA"
     },
     {
       "institution": "Valley View School",
@@ -146,8 +146,6 @@ I am a software developer passionate about building scalable applications and so
   developer_tools:
     - Git & GitHub
     - Docker
-    - Kubernetes
-    - Kafka
     - Prometheus & Grafana
     - npm
 `,
@@ -732,7 +730,7 @@ export default function Resume() {
                               </div>
                               <div className="flex items-baseline gap-1 mt-1">
                                 <span className="text-2xl font-bold font-sans text-white">
-                                  9.79
+                                  9.76
                                 </span>
                                 <span className="text-xs font-mono text-zinc-500">
                                   / 10.0
@@ -970,7 +968,7 @@ export default function Resume() {
                               <div className="pt-2 flex items-center gap-1.5 text-xs font-mono">
                                 <span className="text-zinc-500">Grade:</span>
                                 <span className="text-brand font-bold">
-                                  9.79 CGPA
+                                  9.76 CGPA
                                 </span>
                               </div>
                             </div>
@@ -1139,8 +1137,6 @@ export default function Resume() {
                               {[
                                 "Git & GitHub",
                                 "Docker",
-                                "Kubernetes",
-                                "Kafka",
                                 "Prometheus & Grafana",
                                 "npm",
                               ].map((item) => (

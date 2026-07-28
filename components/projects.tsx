@@ -15,13 +15,31 @@ const PROJECTS = [
     href: "https://drive.google.com/file/d/1VgOs2-xuNvw_hiDEwBo4DXouJeeAfh3P/view?usp=sharing",
     tags: ["Next.js", "TypeScript", "FastAPI", "PostgreSQL", "Redis"],
     img: "/projects/praksat.jpg",
+    award: "SIH 2025 ISRO TOP 5 FINALIST",
+    awardBadgeColor: "text-rose-400 border-rose-500/40 bg-black/85 shadow-[0_0_14px_rgba(244,63,94,0.4)]",
   },
   {
     title: "Zit",
     desc: "A terminal-based AI Git assistant built with an interactive TUI, enabling real-time debugging, workflow automation, and intelligent developer assistance.",
-    href: "https://main.dg6ahogo2wxtk.amplifyapp.com/",
+    href: "https://zit-aws.vercel.app/",
     tags: ["Rust", "Git", "AWS Lambda", "Amazon Bedrock"],
     img: "/projects/zit.png",
+    award: "AWS AI HACKATHON 2ND RUNNER-UP",
+    awardBadgeColor: "text-amber-400 border-amber-500/40 bg-black/85 shadow-[0_0_14px_rgba(245,158,11,0.4)]",
+  },
+  {
+    title: "VyaparFlow",
+    desc: "A multi-tenant SaaS platform that streamlines procurement and vendor payment workflows for Indian MSMEs with role-based approvals, invoice verification, audit logs, and secure Razorpay payment integration.",
+    href: "https://vyaparflow.vercel.app/",
+    tags: ["Next.js", "TypeScript", "FastAPI", "PostgreSQL", "Tailwind CSS", "jwt", "Razorpay"],
+    img: "/projects/vyaparflow.png",
+  },
+  {
+    title: "StudentOS",
+    desc: "An AI-powered productivity platform that brings task management, note-taking, study planning, and focus sessions into a desktop-like workspace designed for students.",
+    href: "https://studentos-varun.vercel.app/",
+    tags: ["Next.js", "TypeScript", "Tailwind CSS", "PostgreSQL", "jwt"],
+    img: "/projects/studentos.png",
   },
 ];
 
@@ -93,7 +111,19 @@ export default function Projects() {
                 {/* Monochromatic Overlay */}
                 <div className="absolute inset-0 bg-black/40 mix-blend-color group-hover:bg-transparent transition-colors duration-500" />
                 
-                {/* Tech Badge Float */}
+                {/* Glowing Hackathon Award Badge Float */}
+                {proj.award && (
+                  <div className="absolute top-3 left-3 z-10">
+                    <span
+                      className={`inline-flex items-center gap-1.5 text-[10px] font-mono font-bold tracking-wider px-2.5 py-1 rounded-full border backdrop-blur-md ${proj.awardBadgeColor}`}
+                    >
+                      <span>🏆</span>
+                      <span>{proj.award}</span>
+                    </span>
+                  </div>
+                )}
+
+                {/* External Link Float */}
                 <div className="absolute top-3 right-3 p-2 rounded-lg bg-black/80 border border-white/10 text-zinc-400 group-hover:text-brand transition-colors duration-300">
                   <ExternalLink className="h-4 w-4" />
                 </div>

@@ -5,6 +5,7 @@ import About from "@/components/about";
 import TechStack from "@/components/tech-stack";
 import Projects from "@/components/projects";
 import Journey from "@/components/journey";
+import Certifications from "@/components/certifications";
 import Resume from "@/components/resume";
 import Contact from "@/components/contact";
 import Footer from "@/components/footer";
@@ -35,6 +36,7 @@ export default function HomePage() {
       <TechStack />
       <Projects />
       <Journey />
+      <Certifications />
       <Resume />
       <Contact />
       <Footer />

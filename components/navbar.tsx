@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Home, User, Code2, Folder, History, FileText, Mail } from "lucide-react";
+import { Home, User, Code2, Folder, History, Award, FileText, Mail } from "lucide-react";
 
 const NAV_ITEMS = [
   { id: "home", label: "Home", icon: Home },
@@ -10,6 +10,7 @@ const NAV_ITEMS = [
   { id: "skills", label: "Skills", icon: Code2 },
   { id: "projects", label: "Projects", icon: Folder },
   { id: "journey", label: "Experience", icon: History },
+  { id: "certifications", label: "Certifications", icon: Award },
   { id: "resume", label: "Resume", icon: FileText },
   { id: "contact", label: "Contact", icon: Mail },
 ];

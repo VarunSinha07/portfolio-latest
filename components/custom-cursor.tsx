@@ -251,10 +251,17 @@ export default function CustomCursor() {
         return;
       }
 
-      // Interpolate main coordinates
-      const ease = 0.22; // snappy LERP
-      currentCoords.current.x += (mouseCoords.current.x - currentCoords.current.x) * ease;
-      currentCoords.current.y += (mouseCoords.current.y - currentCoords.current.y) * ease;
+      // Interpolate main coordinates with snappy ultra-responsive LERP
+      const ease = 0.55;
+      const dx = mouseCoords.current.x - currentCoords.current.x;
+      const dy = mouseCoords.current.y - currentCoords.current.y;
+      if (Math.abs(dx) < 0.1 && Math.abs(dy) < 0.1) {
+        currentCoords.current.x = mouseCoords.current.x;
+        currentCoords.current.y = mouseCoords.current.y;
+      } else {
+        currentCoords.current.x += dx * ease;
+        currentCoords.current.y += dy * ease;
+      }
 
       const isMagnetActive = magnetActiveRef.current;
 
@@ -314,7 +321,7 @@ export default function CustomCursor() {
       {/* Arrow Pointer (Lucide MousePointer2) */}
       <MousePointer2
         ref={arrowRef}
-        className="absolute inset-0 transition-all duration-150 ease-out origin-top-left"
+        className="absolute inset-0 transition-opacity duration-100 ease-out origin-top-left"
         size={20}
         style={{
           color: currentAccent,
@@ -326,7 +333,7 @@ export default function CustomCursor() {
       {/* Hand Selector (Lucide Pointer - correct tilted pointing index finger) */}
       <Pointer
         ref={handRef}
-        className="absolute inset-0 transition-all duration-150 ease-out origin-top-left opacity-0"
+        className="absolute inset-0 transition-opacity duration-100 ease-out origin-top-left opacity-0"
         size={20}
         style={{
           color: currentAccent,

@@ -217,7 +217,7 @@ export default function Hero() {
             <div className="flex flex-col">
               <span className="text-[9px] font-mono uppercase tracking-wider text-zinc-500">CGPA</span>
               <div className="flex items-baseline mt-1">
-                <span className="text-4xl md:text-5xl font-black tracking-tighter text-white">9.79</span>
+                <span className="text-4xl md:text-5xl font-black tracking-tighter text-white">9.76</span>
                 <span className="text-[10px] font-mono text-zinc-500 ml-1">/10</span>
               </div>
             </div>
@@ -228,10 +228,10 @@ export default function Hero() {
 
           {/* Tag labels */}
           <div className="flex flex-wrap gap-1.5 pt-1">
+            <span className="text-[9px] font-mono px-2 py-0.5 rounded bg-zinc-950 border border-white/5 text-zinc-400">SOFTWARE</span>
             <span className="text-[9px] font-mono px-2 py-0.5 rounded bg-zinc-950 border border-white/5 text-zinc-400">BACKEND</span>
             <span className="text-[9px] font-mono px-2 py-0.5 rounded bg-zinc-950 border border-white/5 text-zinc-400">DISTRIBUTED</span>
-            <span className="text-[9px] font-mono px-2 py-0.5 rounded bg-zinc-950 border border-white/5 text-zinc-400">CONTAINERS</span>
-            <span className="text-[9px] font-mono px-2 py-0.5 rounded bg-zinc-950 border border-white/5 text-zinc-400">SYSTEMS</span>
+            <span className="text-[9px] font-mono px-2 py-0.5 rounded bg-zinc-950 border border-white/5 text-zinc-400">MICROSERVICES</span>
           </div>
 
         </div>

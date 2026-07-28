@@ -12,6 +12,9 @@ const JOURNEY_ITEMS = [
     role: "2nd Runner-Up",
     org: "AWS AI for Bharat Hackathon",
     date: "April 2026",
+    featured: true,
+    glowBadge: "🏆 NATIONAL 2ND RUNNER-UP",
+    glowColor: "amber",
     description: "Built ZIT, an AI-powered Git and GitHub assistant in Rust featuring an intelligent terminal UI, autonomous Git agent, AI mentorship, GitHub integration, and advanced repository management tools, securing 2nd Runner-Up nationally.",
   },
   {
@@ -19,6 +22,9 @@ const JOURNEY_ITEMS = [
     role: "Top 5 Finalist",
     org: "Smart India Hackathon 2025 for ISRO",
     date: "Dec 2025",
+    featured: true,
+    glowBadge: "🚀 SIH 2025 ISRO TOP 5 FINALIST",
+    glowColor: "rose",
     description: "Built a scalable multi-tenant air quality forecasting SaaS platform featuring role-based access control, credits-based API monetization, and interactive analytics dashboards, securing a Top 5 Finalist position at SIH 2025.",
   },
   {
@@ -167,14 +173,25 @@ export default function Journey() {
             {JOURNEY_ITEMS.map((item, index) => {
               const isEven = index % 2 === 0;
               const isExperience = item.type === "experience";
+              const isFeatured = item.featured;
               
-              const themeColorClass = isExperience ? "text-brand" : "text-accent";
-              const dotBorderClass = isExperience 
+              let themeColorClass = isExperience ? "text-brand" : "text-accent";
+              let dotBorderClass = isExperience 
                 ? "border-brand shadow-[0_0_8px_rgba(34,197,94,0.4)]" 
                 : "border-accent shadow-[0_0_8px_rgba(239,68,68,0.4)]";
-              const hoverShadowClass = isExperience 
+              let hoverShadowClass = isExperience 
                 ? "hover:shadow-[0_0_30px_rgba(34,197,94,0.12)] hover:border-brand/30" 
                 : "hover:shadow-[0_0_30px_rgba(239,68,68,0.12)] hover:border-accent/30";
+
+              if (isFeatured && item.glowColor === "amber") {
+                themeColorClass = "text-amber-400 font-bold";
+                dotBorderClass = "border-amber-400 bg-amber-400/20 shadow-[0_0_14px_rgba(245,158,11,0.9)] animate-pulse scale-125";
+                hoverShadowClass = "border-amber-500/40 bg-zinc-950/60 shadow-[0_0_30px_rgba(245,158,11,0.2)] hover:shadow-[0_0_45px_rgba(245,158,11,0.3)] hover:border-amber-400/60";
+              } else if (isFeatured && item.glowColor === "rose") {
+                themeColorClass = "text-rose-400 font-bold";
+                dotBorderClass = "border-rose-400 bg-rose-400/20 shadow-[0_0_14px_rgba(244,63,94,0.9)] animate-pulse scale-125";
+                hoverShadowClass = "border-rose-500/40 bg-zinc-950/60 shadow-[0_0_30px_rgba(244,63,94,0.2)] hover:shadow-[0_0_45px_rgba(244,63,94,0.3)] hover:border-rose-400/60";
+              }
 
               return (
                 <div
@@ -187,7 +204,7 @@ export default function Journey() {
                   {/* Central Node Dot (aligned perfectly with top-7, centered using negative margins to avoid GSAP conflicts) */}
                   <div className="absolute left-4 -ml-[7px] md:left-1/2 md:-ml-[7px] top-7 z-20 flex items-center justify-center h-3.5 w-3.5 pointer-events-none">
                     <div
-                      className={`timeline-dot h-3.5 w-3.5 rounded-full bg-black border-2 ${dotBorderClass} pointer-events-auto`}
+                      className={`timeline-dot h-3.5 w-3.5 rounded-full bg-black border-2 ${dotBorderClass} pointer-events-auto transition-transform`}
                     />
                   </div>
 
@@ -202,6 +219,19 @@ export default function Journey() {
                     >
                       {isEven && (
                         <div className={`timeline-card-content p-6 rounded-xl bg-zinc-950/20 hover:bg-zinc-950/40 border border-white/5 ${hoverShadowClass} transition-all duration-300 text-left md:text-right relative`}>
+                          {item.glowBadge && (
+                            <div className="mb-2.5 flex md:justify-end">
+                              <span
+                                className={`inline-flex items-center gap-1 text-[10px] font-mono font-bold tracking-wider px-2.5 py-0.5 rounded-full border ${
+                                  item.glowColor === "amber"
+                                    ? "text-amber-400 border-amber-500/40 bg-amber-500/10 shadow-[0_0_10px_rgba(245,158,11,0.3)]"
+                                    : "text-rose-400 border-rose-500/40 bg-rose-500/10 shadow-[0_0_10px_rgba(244,63,94,0.3)]"
+                                }`}
+                              >
+                                {item.glowBadge}
+                              </span>
+                            </div>
+                          )}
                           <div className={`text-xs font-mono mb-2 ${themeColorClass} tracking-wider`}>
                             {item.date}
                           </div>
@@ -229,6 +259,19 @@ export default function Journey() {
                     >
                       {!isEven && (
                         <div className={`timeline-card-content p-6 rounded-xl bg-zinc-950/20 hover:bg-zinc-950/40 border border-white/5 ${hoverShadowClass} transition-all duration-300 text-left relative`}>
+                          {item.glowBadge && (
+                            <div className="mb-2.5 flex justify-start">
+                              <span
+                                className={`inline-flex items-center gap-1 text-[10px] font-mono font-bold tracking-wider px-2.5 py-0.5 rounded-full border ${
+                                  item.glowColor === "amber"
+                                    ? "text-amber-400 border-amber-500/40 bg-amber-500/10 shadow-[0_0_10px_rgba(245,158,11,0.3)]"
+                                    : "text-rose-400 border-rose-500/40 bg-rose-500/10 shadow-[0_0_10px_rgba(244,63,94,0.3)]"
+                                }`}
+                              >
+                                {item.glowBadge}
+                              </span>
+                            </div>
+                          )}
                           <div className={`text-xs font-mono mb-2 ${themeColorClass} tracking-wider`}>
                             {item.date}
                           </div>
