@@ -99,6 +99,12 @@
     min-height: 44px;
     min-width: 44px;
   }
+
+  /* Override touch target minimum size for compact bottom navbar */
+  nav a {
+    min-height: auto !important;
+    min-width: auto !important;
+  }
 }
 
 /* Additional mobile optimizations for smooth scrolling */
