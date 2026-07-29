@@ -83,7 +83,7 @@ export default function Projects() {
         {/* Section Header */}
         <div className="mb-16 space-y-2 text-center">
           <span className="text-xs font-mono uppercase tracking-widest text-accent">
-            [ SELECTED PROJECTS ]
+            [ PROJECTS ]
           </span>
           <h2 className="text-3xl md:text-5xl font-black tracking-tight text-white uppercase font-sans">
             Portfolio Works
